@@ -816,40 +816,62 @@
         let gameTimer;
         let player = {
             x: canvas.width / 2,
-            y: canvas.height - 80,
-            width: 60,
-            height: 60,
+            y: canvas.height - 60,
+            width: 40,
+            height: 40,
             speed: 8
         };
         let hearts = [];
         let keys = {};
+        
+        // Load Beza's pixel art image
+        const playerImage = new Image();
+        playerImage.src = 'file_00000000d668720cbcbce4985243f5fc.png';
+        let imageLoaded = false;
+        
+        playerImage.onload = function() {
+            imageLoaded = true;
+        };
+        
+        playerImage.onerror = function() {
+            console.log('Image failed to load, using placeholder');
+        };
 
-        // Placeholder character (will be replaced with Beza's image)
+        // Draw Beza's character
         function drawPlayer() {
             ctx.save();
-            ctx.translate(player.x, player.y);
             
-            // Draw a simple character placeholder
-            // Body
-            ctx.fillStyle = '#FF6B9D';
-            ctx.beginPath();
-            ctx.arc(30, 20, 15, 0, Math.PI * 2);
-            ctx.fill();
+            // Disable image smoothing for crisp pixel art
+            ctx.imageSmoothingEnabled = false;
             
-            // Simple body
-            ctx.fillRect(20, 35, 20, 25);
-            
-            // Face
-            ctx.fillStyle = '#2D2D2D';
-            ctx.beginPath();
-            ctx.arc(25, 18, 2, 0, Math.PI * 2);
-            ctx.arc(35, 18, 2, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Smile
-            ctx.beginPath();
-            ctx.arc(30, 20, 8, 0, Math.PI);
-            ctx.stroke();
+            if (imageLoaded) {
+                // Draw the actual pixel art image
+                ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+            } else {
+                // Fallback placeholder if image doesn't load
+                ctx.translate(player.x, player.y);
+                
+                // Body
+                ctx.fillStyle = '#FF6B9D';
+                ctx.beginPath();
+                ctx.arc(20, 15, 12, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Simple body
+                ctx.fillRect(14, 27, 12, 13);
+                
+                // Face
+                ctx.fillStyle = '#2D2D2D';
+                ctx.beginPath();
+                ctx.arc(17, 13, 2, 0, Math.PI * 2);
+                ctx.arc(23, 13, 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Smile
+                ctx.beginPath();
+                ctx.arc(20, 15, 6, 0, Math.PI);
+                ctx.stroke();
+            }
             
             ctx.restore();
         }
