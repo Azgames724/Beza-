@@ -816,9 +816,9 @@
         let gameTimer;
         let player = {
             x: canvas.width / 2,
-            y: canvas.height - 60,
-            width: 40,
-            height: 40,
+            y: canvas.height - 80,
+            width: 60,
+            height: 60,
             speed: 8
         };
         let hearts = [];
@@ -839,6 +839,28 @@
             console.log('Using placeholder character instead');
         };
 
+        // Sound Effects
+        const sounds = {
+            collect: new Audio('https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3'), // Coin collect
+            gameOver: new Audio('https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3'), // Victory fanfare
+            background: new Audio('https://assets.mixkit.co/active_storage/sfx/2997/2997-preview.mp3') // Happy background
+        };
+
+        // Set volumes
+        sounds.collect.volume = 0.3;
+        sounds.gameOver.volume = 0.5;
+        sounds.background.volume = 0.2;
+        sounds.background.loop = true;
+
+        function playSound(soundName) {
+            try {
+                sounds[soundName].currentTime = 0;
+                sounds[soundName].play().catch(e => console.log('Sound play failed:', e));
+            } catch (e) {
+                console.log('Sound error:', e);
+            }
+        }
+
         // Draw Beza's character
         function drawPlayer() {
             ctx.save();
@@ -856,22 +878,22 @@
                 // Body
                 ctx.fillStyle = '#FF6B9D';
                 ctx.beginPath();
-                ctx.arc(20, 15, 12, 0, Math.PI * 2);
+                ctx.arc(30, 20, 15, 0, Math.PI * 2);
                 ctx.fill();
                 
                 // Simple body
-                ctx.fillRect(14, 27, 12, 13);
+                ctx.fillRect(20, 35, 20, 25);
                 
                 // Face
                 ctx.fillStyle = '#2D2D2D';
                 ctx.beginPath();
-                ctx.arc(17, 13, 2, 0, Math.PI * 2);
-                ctx.arc(23, 13, 2, 0, Math.PI * 2);
+                ctx.arc(25, 18, 2, 0, Math.PI * 2);
+                ctx.arc(35, 18, 2, 0, Math.PI * 2);
                 ctx.fill();
                 
                 // Smile
                 ctx.beginPath();
-                ctx.arc(20, 15, 6, 0, Math.PI);
+                ctx.arc(30, 20, 8, 0, Math.PI);
                 ctx.stroke();
             }
             
@@ -946,6 +968,7 @@
                 // Check collision
                 if (checkCollision(hearts[i])) {
                     score++;
+                    playSound('collect'); // Play collect sound
                     document.getElementById('gameScore').textContent = score;
                     hearts.splice(i, 1);
                     
@@ -976,6 +999,9 @@
             document.getElementById('gameScore').textContent = score;
             document.getElementById('gameTimer').textContent = timeLeft;
 
+            // Play background music
+            playSound('background');
+
             // Start timer
             gameTimer = setInterval(() => {
                 timeLeft--;
@@ -992,6 +1018,13 @@
         function endGame(won) {
             gameActive = false;
             clearInterval(gameTimer);
+            
+            // Stop background music
+            sounds.background.pause();
+            sounds.background.currentTime = 0;
+            
+            // Play victory sound
+            playSound('gameOver');
             
             const gameOverMessage = document.getElementById('gameOverMessage');
             const gameOverText = document.getElementById('gameOverText');
