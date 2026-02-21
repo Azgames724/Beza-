@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Beza! 🎉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B9D;
+            --secondary: #FEC84E;
+            --accent: #A0E7E5;
+            --purple: #B4A7D6;
+            --bg: #FFF9F0;
+            --text: #2D2D2D;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Container for all screens */
+        .screen {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Floating background elements */
+        .bg-decoration {
+            position: fixed;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            transform: rotate(45deg);
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.15;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .heart::before { left: -25px; }
+        .heart::after { top: -25px; }
+
+        .heart1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .heart2 { top: 70%; right: 15%; animation-delay: 2s; width: 35px; height: 35px; }
+        .heart3 { top: 40%; left: 85%; animation-delay: 4s; width: 40px; height: 40px; }
+
+        @keyframes float {
+            0%, 100% { transform: rotate(45deg) translateY(0px); }
+            50% { transform: rotate(45deg) translateY(-20px); }
+        }
+
+        /* Screen 1: Secret Code */
+        .code-screen {
+            text-align: center;
+        }
+
+        .code-screen h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-shadow: 4px 4px 0px var(--secondary);
+        }
+
+        .code-screen p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: var(--purple);
+        }
+
+        .code-input {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .code-digit {
+            width: 70px;
+            height: 80px;
+            font-size: 2.5rem;
+            text-align: center;
+            border: 4px solid var(--primary);
+            border-radius: 15px;
+            background: white;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .code-digit:focus {
+            outline: none;
+            border-color: var(--secondary);
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+        }
+
+        .error-message {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+        }
+
+        .hint {
+            margin-top: 40px;
+            font-size: 1.1rem;
+            color: var(--text);
+            opacity: 0.6;
+        }
+
+        /* Screen 2: Envelope */
+        .envelope-screen {
+            text-align: center;
+        }
+
+        .envelope-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-container:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: white;
+            border: 5px solid var(--primary);
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.3);
+        }
+
+        .envelope::before {
+            content: '💌';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+        }
+
+        .envelope-flap {
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid var(--secondary);
+            position: absolute;
+            top: -5px;
+            left: 0;
+            transform-origin: top;
+            transition: transform 0.8s ease;
+        }
+
+        .envelope.opened .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .tap-text {
+            margin-top: 40px;
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: var(--purple);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Screen 3: Hearts Collection Game */
+        .game-screen {
+            text-align: center;
+            width: 100%;
+            max-width: 100vw;
+            padding: 20px;
+        }
+
+        .game-screen h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .game-instructions {
+            font-size: 1.2rem;
+            color: var(--purple);
+            margin-bottom: 20px;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .stat {
+            background: white;
+            padding: 15px 30px;
+            border-radius: 20px;
+            border: 3px solid var(--accent);
+        }
+
+        .score {
+            color: var(--primary);
+        }
+
+        .timer {
+            color: var(--secondary);
+        }
+
+        #gameCanvas {
+            background: linear-gradient(180deg, #E3F2FD 0%, #FFF9F0 100%);
+            border: 5px solid var(--primary);
+            border-radius: 20px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.3);
+            max-width: 100%;
+            touch-action: none;
+        }
+
+        .game-controls {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .game-over-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            border: 5px solid var(--secondary);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1000;
+            animation: popIn 0.5s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .game-over-message.show {
+            display: block;
+        }
+
+        .game-over-message h3 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .game-over-message p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+        }
+
+        .continue-btn {
+            padding: 18px 50px;
+            font-size: 1.4rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+        }
+
+        .continue-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5);
+        }
+
+        /* Screen 4: Birthday Cake */
+        .cake-screen {
+            text-align: center;
+        }
+
+        .cake-screen h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--primary);
+            margin-bottom: 50px;
+        }
+
+        .cake {
+            font-size: 15rem;
+            margin: 40px 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .cake:hover {
+            transform: scale(1.1);
+        }
+
+        .candle-instruction {
+            font-size: 1.8rem;
+            color: var(--purple);
+            margin-top: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Screen 5: Music Selection */
+        .music-screen {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .music-screen h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--primary);
+            margin-bottom: 50px;
+        }
+
+        .music-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .music-option {
+            padding: 25px;
+            background: white;
+            border: 4px solid var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.3rem;
+        }
+
+        .music-option:hover {
+            transform: translateX(10px);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 30px rgba(254, 200, 78, 0.3);
+        }
+
+        .music-icon {
+            font-size: 2.5rem;
+        }
+
+        /* Screen 6: Photo Gallery */
+        .gallery-screen {
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .gallery-screen h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--secondary);
+            margin-bottom: 60px;
+            text-shadow: 3px 3px 0px var(--accent);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .photo-card {
+            position: relative;
+            aspect-ratio: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: rotate(var(--rotation));
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.3);
+            z-index: 10;
+        }
+
+        .photo-card:nth-child(1) { --rotation: -2deg; border: 4px solid var(--primary); }
+        .photo-card:nth-child(2) { --rotation: 3deg; border: 4px solid var(--secondary); }
+        .photo-card:nth-child(3) { --rotation: -3deg; border: 4px solid var(--accent); }
+        .photo-card:nth-child(4) { --rotation: 2deg; border: 4px solid var(--purple); }
+        .photo-card:nth-child(5) { --rotation: -1deg; border: 4px solid var(--primary); }
+        .photo-card:nth-child(6) { --rotation: 2deg; border: 4px solid var(--secondary); }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            overflow: hidden;
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Pacifico', cursive;
+            font-size: 1.1rem;
+            color: var(--text);
+            white-space: nowrap;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-continue-btn {
+            margin-top: 40px;
+        }
+
+        /* Screen 7: Final Message */
+        .final-screen {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .final-screen h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--primary);
+            margin-bottom: 40px;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .message-box {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 30px;
+            border: 5px solid var(--secondary);
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .message-box p {
+            font-size: 1.4rem;
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+
+        .signature {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-top: 40px;
+        }
+
+        .celebration {
+            font-size: 3rem;
+            margin-top: 30px;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 9999;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .code-digit {
+                width: 50px;
+                height: 60px;
+                font-size: 2rem;
+            }
+
+            .envelope {
+                width: 250px;
+                height: 160px;
+            }
+
+            .envelope-flap {
+                border-left: 125px solid transparent;
+                border-right: 125px solid transparent;
+                border-top: 80px solid var(--secondary);
+            }
+
+            .cake {
+                font-size: 10rem;
+            }
+
+            .game-stats {
+                gap: 20px;
+                font-size: 1.1rem;
+            }
+
+            .stat {
+                padding: 10px 20px;
+            }
+
+            .game-controls {
+                font-size: 0.9rem;
+            }
+
+            .message-box {
+                padding: 30px 20px;
+            }
+
+            .message-box p {
+                font-size: 1.2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Decorations -->
+    <div class="bg-decoration heart heart1"></div>
+    <div class="bg-decoration heart heart2"></div>
+    <div class="bg-decoration heart heart3"></div>
+
+    <!-- Screen 1: Secret Code Entry -->
+    <div class="screen active code-screen" id="codeScreen">
+        <h1>🔐 Secret Code</h1>
+        <p>Enter the secret code to unlock Beza's birthday surprise!</p>
+        <div class="code-input">
+            <input type="text" maxlength="1" class="code-digit" id="digit1" autofocus>
+            <input type="text" maxlength="1" class="code-digit" id="digit2">
+            <input type="text" maxlength="1" class="code-digit" id="digit3">
+            <input type="text" maxlength="1" class="code-digit" id="digit4">
+        </div>
+        <div class="error-message" id="errorMsg">❌ Try again!</div>
+        <div class="hint">💡 Hint: The month and day of her birthday (MMDD)</div>
+    </div>
+
+    <!-- Screen 2: Envelope -->
+    <div class="screen envelope-screen" id="envelopeScreen">
+        <h2 style="font-family: Pacifico, cursive; font-size: 3rem; color: var(--primary); margin-bottom: 50px;">
+            You've Got Mail! 💌
+        </h2>
+        <div class="envelope-container" id="envelopeContainer">
+            <div class="envelope" id="envelope">
+                <div class="envelope-flap"></div>
+            </div>
+        </div>
+        <div class="tap-text">Tap to open!</div>
+    </div>
+
+    <!-- Screen 3: Hearts Collection Game -->
+    <div class="screen game-screen" id="gameScreen">
+        <h2>Catch the Falling Hearts! 💖</h2>
+        <div class="game-instructions">Use arrow keys or touch to move left and right!</div>
+        <div class="game-stats">
+            <div class="stat score">Score: <span id="gameScore">0</span> / 20</div>
+            <div class="stat timer">Time: <span id="gameTimer">60</span>s</div>
+        </div>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <div class="game-controls">
+            ⬅️ Left Arrow | Right Arrow ➡️ | Touch & Drag on Mobile
+        </div>
+    </div>
+
+    <!-- Game Over Message -->
+    <div class="game-over-message" id="gameOverMessage">
+        <h3>🎉 Amazing!</h3>
+        <p id="gameOverText">You collected all the hearts!</p>
+        <button class="continue-btn" id="gameOverBtn">Continue to Next Surprise! 🎁</button>
+    </div>
+
+    <!-- Screen 4: Blow the Candle -->
+    <div class="screen cake-screen" id="cakeScreen">
+        <h2>Make a Wish! ✨</h2>
+        <div class="cake" id="cake">🎂</div>
+        <div class="candle-instruction">Click the cake to blow out the candles!</div>
+    </div>
+
+    <!-- Screen 5: Choose Music -->
+    <div class="screen music-screen" id="musicScreen">
+        <h2>Choose Your Birthday Vibe 🎵</h2>
+        <div class="music-options">
+            <div class="music-option" onclick="selectMusic('party')">
+                <span class="music-icon">🎉</span>
+                <span>Party Mode - Let's celebrate!</span>
+            </div>
+            <div class="music-option" onclick="selectMusic('romantic')">
+                <span class="music-icon">💕</span>
+                <span>Romantic - Just for you</span>
+            </div>
+            <div class="music-option" onclick="selectMusic('chill')">
+                <span class="music-icon">😌</span>
+                <span>Chill Vibes - Relax and enjoy</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 6: Photo Gallery -->
+    <div class="screen gallery-screen" id="galleryScreen">
+        <h2>Our Beautiful Memories 📸</h2>
+        <div class="gallery-grid">
+            <div class="photo-card">
+                <div class="photo-placeholder">📸</div>
+                <div class="caption">First Adventure</div>
+            </div>
+            <div class="photo-card">
+                <div class="photo-placeholder">💑</div>
+                <div class="caption">Sweet Moments</div>
+            </div>
+            <div class="photo-card">
+                <div class="photo-placeholder">🌅</div>
+                <div class="caption">Sunset Together</div>
+            </div>
+            <div class="photo-card">
+                <div class="photo-placeholder">😂</div>
+                <div class="caption">Silly Times</div>
+            </div>
+            <div class="photo-card">
+                <div class="photo-placeholder">🎉</div>
+                <div class="caption">Celebrations</div>
+            </div>
+            <div class="photo-card">
+                <div class="photo-placeholder">❤️</div>
+                <div class="caption">Forever Us</div>
+            </div>
+        </div>
+        <button class="continue-btn gallery-continue-btn" onclick="goToScreen('finalScreen'); createConfetti();">
+            Continue to Final Message 💝
+        </button>
+    </div>
+
+    <!-- Screen 7: Final Message -->
+    <div class="screen final-screen" id="finalScreen">
+        <h1>Happy Birthday Beza! 🎉</h1>
+        <div class="message-box">
+            <p>Dear Beza,</p>
+            <p>Happy birthday to the most amazing person in my world! I hope this little journey brought a smile to your face, because that's what you do for me every single day.</p>
+            <p>You light up my life in ways I never imagined possible. Your laughter is my favorite sound, your smile is my favorite sight, and spending time with you is my favorite thing to do.</p>
+            <p>On your special day, I want you to know how incredibly grateful I am to have you in my life. You make every moment sweeter, every day brighter, and every challenge easier.</p>
+            <p>Here's to another year of beautiful memories, endless laughter, and all the love in the world. You deserve everything wonderful today and always!</p>
+            <p>I love you more than words can express. Thank you for being you. 💖</p>
+            <div class="signature">Forever yours ❤️</div>
+        </div>
+        <div class="celebration">🎊 🎈 🎁 🎉 ✨</div>
+    </div>
+
+    <script>
+        // Secret Code Logic
+        const correctCode = '0101'; // Change this to Beza's birthday (MMDD format)
+        const digits = [
+            document.getElementById('digit1'),
+            document.getElementById('digit2'),
+            document.getElementById('digit3'),
+            document.getElementById('digit4')
+        ];
+        const errorMsg = document.getElementById('errorMsg');
+
+        digits.forEach((digit, index) => {
+            digit.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < 3) {
+                    digits[index + 1].focus();
+                }
+                
+                if (index === 3 && e.target.value.length === 1) {
+                    checkCode();
+                }
+            });
+
+            digit.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                    digits[index - 1].focus();
+                }
+            });
+        });
+
+        function checkCode() {
+            const enteredCode = digits.map(d => d.value).join('');
+            if (enteredCode === correctCode) {
+                goToScreen('envelopeScreen');
+            } else {
+                errorMsg.classList.add('show');
+                digits.forEach(d => {
+                    d.style.borderColor = 'var(--primary)';
+                    d.value = '';
+                });
+                digits[0].focus();
+                
+                setTimeout(() => {
+                    errorMsg.classList.remove('show');
+                }, 2000);
+            }
+        }
+
+        // Envelope Logic
+        const envelope = document.getElementById('envelope');
+        const envelopeContainer = document.getElementById('envelopeContainer');
+
+        envelopeContainer.addEventListener('click', () => {
+            envelope.classList.add('opened');
+            setTimeout(() => {
+                goToScreen('gameScreen');
+                initGame();
+            }, 1000);
+        });
+
+        // Hearts Collection Game Logic
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let gameActive = false;
+        let score = 0;
+        let timeLeft = 60;
+        let gameTimer;
+        let player = {
+            x: canvas.width / 2,
+            y: canvas.height - 80,
+            width: 60,
+            height: 60,
+            speed: 8
+        };
+        let hearts = [];
+        let keys = {};
+
+        // Placeholder character (will be replaced with Beza's image)
+        function drawPlayer() {
+            ctx.save();
+            ctx.translate(player.x, player.y);
+            
+            // Draw a simple character placeholder
+            // Body
+            ctx.fillStyle = '#FF6B9D';
+            ctx.beginPath();
+            ctx.arc(30, 20, 15, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Simple body
+            ctx.fillRect(20, 35, 20, 25);
+            
+            // Face
+            ctx.fillStyle = '#2D2D2D';
+            ctx.beginPath();
+            ctx.arc(25, 18, 2, 0, Math.PI * 2);
+            ctx.arc(35, 18, 2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Smile
+            ctx.beginPath();
+            ctx.arc(30, 20, 8, 0, Math.PI);
+            ctx.stroke();
+            
+            ctx.restore();
+        }
+
+        function createHeart() {
+            return {
+                x: Math.random() * (canvas.width - 40),
+                y: -30,
+                width: 30,
+                height: 30,
+                speed: 2 + Math.random() * 2,
+                color: ['#FF6B9D', '#FEC84E', '#A0E7E5', '#B4A7D6'][Math.floor(Math.random() * 4)]
+            };
+        }
+
+        function drawHeart(heart) {
+            ctx.save();
+            ctx.translate(heart.x, heart.y);
+            ctx.fillStyle = heart.color;
+            
+            // Draw heart shape
+            ctx.beginPath();
+            ctx.moveTo(15, 10);
+            ctx.bezierCurveTo(15, 7, 12, 5, 9, 5);
+            ctx.bezierCurveTo(4, 5, 0, 9, 0, 14);
+            ctx.bezierCurveTo(0, 18, 3, 22, 15, 30);
+            ctx.bezierCurveTo(27, 22, 30, 18, 30, 14);
+            ctx.bezierCurveTo(30, 9, 26, 5, 21, 5);
+            ctx.bezierCurveTo(18, 5, 15, 7, 15, 10);
+            ctx.fill();
+            
+            ctx.restore();
+        }
+
+        function checkCollision(heart) {
+            return heart.x < player.x + player.width &&
+                   heart.x + heart.width > player.x &&
+                   heart.y < player.y + player.height &&
+                   heart.y + heart.height > player.y;
+        }
+
+        function updateGame() {
+            if (!gameActive) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#E3F2FD');
+            gradient.addColorStop(1, '#FFF9F0');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Move player
+            if (keys['ArrowLeft'] && player.x > 0) {
+                player.x -= player.speed;
+            }
+            if (keys['ArrowRight'] && player.x < canvas.width - player.width) {
+                player.x += player.speed;
+            }
+
+            // Draw player
+            drawPlayer();
+
+            // Update and draw hearts
+            for (let i = hearts.length - 1; i >= 0; i--) {
+                hearts[i].y += hearts[i].speed;
+                drawHeart(hearts[i]);
+
+                // Check collision
+                if (checkCollision(hearts[i])) {
+                    score++;
+                    document.getElementById('gameScore').textContent = score;
+                    hearts.splice(i, 1);
+                    
+                    if (score >= 20) {
+                        endGame(true);
+                        return;
+                    }
+                } else if (hearts[i].y > canvas.height) {
+                    hearts.splice(i, 1);
+                }
+            }
+
+            // Spawn new hearts
+            if (Math.random() < 0.03) {
+                hearts.push(createHeart());
+            }
+
+            requestAnimationFrame(updateGame);
+        }
+
+        function initGame() {
+            gameActive = true;
+            score = 0;
+            timeLeft = 60;
+            hearts = [];
+            player.x = canvas.width / 2;
+            
+            document.getElementById('gameScore').textContent = score;
+            document.getElementById('gameTimer').textContent = timeLeft;
+
+            // Start timer
+            gameTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('gameTimer').textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    endGame(false);
+                }
+            }, 1000);
+
+            updateGame();
+        }
+
+        function endGame(won) {
+            gameActive = false;
+            clearInterval(gameTimer);
+            
+            const gameOverMessage = document.getElementById('gameOverMessage');
+            const gameOverText = document.getElementById('gameOverText');
+            
+            if (won) {
+                gameOverText.textContent = '🎉 Amazing! You collected all 20 hearts!';
+            } else {
+                gameOverText.textContent = `Great job! You collected ${score} hearts! 💖`;
+            }
+            
+            gameOverMessage.classList.add('show');
+            createConfetti();
+        }
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+        });
+
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+
+        // Touch controls for mobile
+        let touchStartX = 0;
+        canvas.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touchX = e.touches[0].clientX;
+            const rect = canvas.getBoundingClientRect();
+            const canvasX = (touchX - rect.left) * (canvas.width / rect.width);
+            player.x = Math.max(0, Math.min(canvasX - player.width / 2, canvas.width - player.width));
+        });
+
+        // Game over button
+        document.getElementById('gameOverBtn').addEventListener('click', () => {
+            document.getElementById('gameOverMessage').classList.remove('show');
+            goToScreen('cakeScreen');
+        });
+
+        // Cake Logic
+        const cake = document.getElementById('cake');
+        let cakeClicked = false;
+
+        cake.addEventListener('click', () => {
+            if (!cakeClicked) {
+                cakeClicked = true;
+                cake.textContent = '🍰';
+                createConfetti();
+                
+                setTimeout(() => {
+                    goToScreen('musicScreen');
+                }, 2000);
+            }
+        });
+
+        // Music Selection
+        function selectMusic(type) {
+            setTimeout(() => {
+                goToScreen('galleryScreen');
+            }, 300);
+        }
+
+        // Screen Navigation
+        function goToScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // Confetti Effect
+        function createConfetti() {
+            const colors = ['#FF6B9D', '#FEC84E', '#A0E7E5', '#B4A7D6'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 6000);
+                }, i * 30);
+            }
+        }
+
+        // Resize canvas for mobile
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            const maxWidth = Math.min(800, window.innerWidth - 40);
+            canvas.style.width = maxWidth + 'px';
+            canvas.style.height = (maxWidth * 0.75) + 'px';
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+    </script>
+</body>
+</html>
