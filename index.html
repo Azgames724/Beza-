@@ -7,20 +7,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* ================================
+           CUSTOMIZATION SECTION - COLORS
+           ================================
+           Change these colors to match your theme!
+        */
+        :root {
+            --primary: #FF6B9D;      /* Main pink color */
+            --secondary: #FEC84E;    /* Yellow/gold color */
+            --accent: #A0E7E5;       /* Light blue/cyan */
+            --purple: #B4A7D6;       /* Purple accent */
+            --bg: #FFF9F0;           /* Background cream color */
+            --text: #2D2D2D;         /* Text color */
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #FF6B9D;
-            --secondary: #FEC84E;
-            --accent: #A0E7E5;
-            --purple: #B4A7D6;
-            --bg: #FFF9F0;
-            --text: #2D2D2D;
         }
 
         body {
@@ -623,6 +629,17 @@
     <div class="bg-decoration heart heart1"></div>
     <div class="bg-decoration heart heart2"></div>
     <div class="bg-decoration heart heart3"></div>
+    
+    <!-- Favorite Characters Decorations -->
+    <img src="https://static.wikia.nocookie.net/kungfupanda/images/4/42/Po-movie.png" 
+         style="position: fixed; bottom: 20px; right: 20px; width: 150px; z-index: 0; opacity: 0.3; animation: float 8s ease-in-out infinite;" 
+         alt="Po">
+    <img src="https://static.wikia.nocookie.net/disney/images/b/b6/Ariel_Transparent.png" 
+         style="position: fixed; top: 15%; left: 5%; width: 120px; z-index: 0; opacity: 0.3; animation: float 6s ease-in-out infinite; animation-delay: 1s;" 
+         alt="Ariel">
+    <img src="https://i.pinimg.com/originals/8f/ee/17/8fee17b90a5b613d4fb0e23d3f66dbc9.png" 
+         style="position: fixed; bottom: 20px; left: 20px; width: 100px; z-index: 0; opacity: 0.4; animation: float 7s ease-in-out infinite; animation-delay: 2s;" 
+         alt="Cute puppy">
 
     <!-- Screen 1: Secret Code Entry -->
     <div class="screen active code-screen" id="codeScreen">
@@ -640,9 +657,17 @@
 
     <!-- Screen 2: Envelope -->
     <div class="screen envelope-screen" id="envelopeScreen">
-        <h2 style="font-family: Pacifico, cursive; font-size: 3rem; color: var(--primary); margin-bottom: 50px;">
-            You've Got Mail! 💌
-        </h2>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 30px;">
+            <img src="https://static.wikia.nocookie.net/kungfupanda/images/4/42/Po-movie.png" 
+                 style="width: 70px; animation: bounce 2s infinite;" 
+                 alt="Po">
+            <h2 style="font-family: Pacifico, cursive; font-size: 3rem; color: var(--primary); margin: 0;">
+                You've Got Mail! 💌
+            </h2>
+            <img src="https://static.wikia.nocookie.net/disney/images/b/b6/Ariel_Transparent.png" 
+                 style="width: 60px; animation: bounce 2s infinite; animation-delay: 0.5s;" 
+                 alt="Ariel">
+        </div>
         <div class="envelope-container" id="envelopeContainer">
             <div class="envelope" id="envelope">
                 <div class="envelope-flap"></div>
@@ -681,61 +706,173 @@
 
     <!-- Screen 5: Choose Music -->
     <div class="screen music-screen" id="musicScreen">
-        <h2>Choose Your Birthday Vibe 🎵</h2>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px;">
+            <img src="https://i.pinimg.com/originals/8f/ee/17/8fee17b90a5b613d4fb0e23d3f66dbc9.png" 
+                 style="width: 60px; animation: bounce 2s infinite;" 
+                 alt="Cute puppy">
+            <h2>Choose Your Birthday Vibe 🎵</h2>
+            <img src="https://i.pinimg.com/originals/8f/ee/17/8fee17b90a5b613d4fb0e23d3f66dbc9.png" 
+                 style="width: 60px; animation: bounce 2s infinite; animation-delay: 0.3s; transform: scaleX(-1);" 
+                 alt="Cute puppy">
+        </div>
+        <p style="text-align: center; color: var(--purple); margin-bottom: 30px; font-size: 1.1rem;">
+            🐕 Pick your favorite song! The puppy approves them all! 🐕
+        </p>
         <div class="music-options">
-            <div class="music-option" onclick="selectMusic('party')">
-                <span class="music-icon">🎉</span>
-                <span>Party Mode - Let's celebrate!</span>
+            <!-- 
+            ================================
+            🎵 MUSIC CUSTOMIZATION SECTION
+            ================================
+            Replace the song names and add links to play them!
+            You can add YouTube links, Spotify embeds, or MP3 files.
+            
+            To play a song when selected, update the selectMusic() function
+            at the bottom of this file (search for "Music Selection Logic")
+            -->
+            
+            <!-- SONG 1: Replace with her first favorite song -->
+            <div class="music-option" onclick="selectMusic('song1')">
+                <span class="music-icon">🎵</span>
+                <div>
+                    <strong>Song 1 Title</strong><br>
+                    <small style="opacity: 0.7;">Artist Name</small>
+                </div>
             </div>
-            <div class="music-option" onclick="selectMusic('romantic')">
-                <span class="music-icon">💕</span>
-                <span>Romantic - Just for you</span>
+            
+            <!-- SONG 2: Replace with her second favorite song -->
+            <div class="music-option" onclick="selectMusic('song2')">
+                <span class="music-icon">💖</span>
+                <div>
+                    <strong>Song 2 Title</strong><br>
+                    <small style="opacity: 0.7;">Artist Name</small>
+                </div>
             </div>
-            <div class="music-option" onclick="selectMusic('chill')">
-                <span class="music-icon">😌</span>
-                <span>Chill Vibes - Relax and enjoy</span>
+            
+            <!-- SONG 3: Replace with her third favorite song -->
+            <div class="music-option" onclick="selectMusic('song3')">
+                <span class="music-icon">✨</span>
+                <div>
+                    <strong>Song 3 Title</strong><br>
+                    <small style="opacity: 0.7;">Artist Name</small>
+                </div>
+            </div>
+            
+            <!-- SONG 4: Replace with her fourth favorite song -->
+            <div class="music-option" onclick="selectMusic('song4')">
+                <span class="music-icon">🎶</span>
+                <div>
+                    <strong>Song 4 Title</strong><br>
+                    <small style="opacity: 0.7;">Artist Name</small>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Screen 6: Photo Gallery -->
     <div class="screen gallery-screen" id="galleryScreen">
-        <h2>Our Beautiful Memories 📸</h2>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 20px;">
+            <img src="https://static.wikia.nocookie.net/kungfupanda/images/4/42/Po-movie.png" 
+                 style="width: 100px; animation: bounce 2s infinite;" 
+                 alt="Kung Fu Panda">
+            <h2>Our Beautiful Memories 📸</h2>
+            <img src="https://static.wikia.nocookie.net/disney/images/b/b6/Ariel_Transparent.png" 
+                 style="width: 80px; animation: bounce 2s infinite; animation-delay: 0.5s;" 
+                 alt="Little Mermaid">
+        </div>
+        
+        <!-- Cute Dog Decoration -->
+        <div style="text-align: center; margin-bottom: 30px;">
+            <img src="https://i.pinimg.com/originals/8f/ee/17/8fee17b90a5b613d4fb0e23d3f66dbc9.png" 
+                 style="width: 80px; display: inline-block; animation: bounce 2s infinite;" 
+                 alt="Cute puppy">
+            <span style="font-family: Pacifico, cursive; font-size: 1.5rem; color: var(--primary); margin: 0 20px;">🐕 Puppy approved memories! 🐕</span>
+            <img src="https://i.pinimg.com/originals/8f/ee/17/8fee17b90a5b613d4fb0e23d3f66dbc9.png" 
+                 style="width: 80px; display: inline-block; animation: bounce 2s infinite; animation-delay: 0.3s; transform: scaleX(-1);" 
+                 alt="Cute puppy">
+        </div>
+        
         <div class="gallery-grid">
+            <!-- 
+            ================================
+            📸 PHOTO CUSTOMIZATION SECTION
+            ================================
+            PHOTO 1: Replace with your first photo
+            -->
             <div class="photo-card">
-                <div class="photo-placeholder">📸</div>
-                <div class="caption">First Adventure</div>
+                <div class="photo-placeholder">
+                    <!-- Replace the 📸 below with: <img src="photo1.jpg" alt="Photo 1"> -->
+                    📸
+                </div>
+                <div class="caption">Our First Memory</div>
             </div>
+            
+            <!-- PHOTO 2: Replace with your second photo -->
             <div class="photo-card">
-                <div class="photo-placeholder">💑</div>
+                <div class="photo-placeholder">
+                    <!-- Replace the 💑 below with: <img src="photo2.jpg" alt="Photo 2"> -->
+                    💑
+                </div>
                 <div class="caption">Sweet Moments</div>
             </div>
+            
+            <!-- PHOTO 3: Replace with your third photo -->
             <div class="photo-card">
-                <div class="photo-placeholder">🌅</div>
-                <div class="caption">Sunset Together</div>
+                <div class="photo-placeholder">
+                    <!-- Replace the 🌅 below with: <img src="photo3.jpg" alt="Photo 3"> -->
+                    🌅
+                </div>
+                <div class="caption">Beautiful Day</div>
             </div>
+            
+            <!-- PHOTO 4: Replace with your fourth photo -->
             <div class="photo-card">
-                <div class="photo-placeholder">😂</div>
-                <div class="caption">Silly Times</div>
-            </div>
-            <div class="photo-card">
-                <div class="photo-placeholder">🎉</div>
-                <div class="caption">Celebrations</div>
-            </div>
-            <div class="photo-card">
-                <div class="photo-placeholder">❤️</div>
+                <div class="photo-placeholder">
+                    <!-- Replace the ❤️ below with: <img src="photo4.jpg" alt="Photo 4"> -->
+                    ❤️
+                </div>
                 <div class="caption">Forever Us</div>
             </div>
+            
+            <!-- 
+            ================================
+            🎬 VIDEO SECTION
+            ================================
+            VIDEO: Replace with your video file
+            Format: <video controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                      <source src="video.mp4" type="video/mp4">
+                    </video>
+            -->
+            <div class="photo-card" style="grid-column: span 1;">
+                <div class="photo-placeholder">
+                    <!-- Replace the 🎬 below with your video code (see comment above) -->
+                    🎬
+                </div>
+                <div class="caption">Our Special Video</div>
+            </div>
         </div>
-        <button class="continue-btn gallery-continue-btn" onclick="goToScreen('finalScreen'); createConfetti();">
+        <button class="continue-btn gallery-continue-btn" onclick="goToScreen('finalScreen'); createConfetti(); playSound('celebration');">
             Continue to Final Message 💝
         </button>
     </div>
 
     <!-- Screen 7: Final Message -->
     <div class="screen final-screen" id="finalScreen">
-        <h1>Happy Birthday Beza! 🎉</h1>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px;">
+            <img src="https://static.wikia.nocookie.net/kungfupanda/images/4/42/Po-movie.png" 
+                 style="width: 80px; animation: bounce 2s infinite;" 
+                 alt="Po">
+            <h1>Happy Birthday Beza! 🎉</h1>
+            <img src="https://static.wikia.nocookie.net/disney/images/b/b6/Ariel_Transparent.png" 
+                 style="width: 70px; animation: bounce 2s infinite; animation-delay: 0.3s;" 
+                 alt="Ariel">
+        </div>
         <div class="message-box">
+            <!-- 
+            ================================
+            ✍️ MESSAGE CUSTOMIZATION SECTION
+            ================================
+            Edit the text below to personalize your birthday message!
+            -->
             <p>Dear Beza,</p>
             <p>Happy birthday to the most amazing person in my world! I hope this little journey brought a smile to your face, because that's what you do for me every single day.</p>
             <p>You light up my life in ways I never imagined possible. Your laughter is my favorite sound, your smile is my favorite sight, and spending time with you is my favorite thing to do.</p>
@@ -748,8 +885,111 @@
     </div>
 
     <script>
+        /* ================================
+           🎮 GAME CUSTOMIZATION SECTION
+           ================================ */
+
+        // 🔑 SECRET CODE - Change this to her birthday (MMDD format)
+        // Example: March 15 = '0315', December 25 = '1225'
+        const correctCode = '0101'; // ← CHANGE THIS!
+
+        // ⏱️ GAME SETTINGS
+        const heartsToCollect = 20;  // How many hearts to win
+        const gameTime = 60;          // Game time in seconds
+        const playerSpeed = 8;        // How fast the character moves (higher = faster)
+
+        /* ================================
+           🖼️ IMAGE CUSTOMIZATION SECTION
+           ================================ */
+        
+        // 👤 PLAYER CHARACTER IMAGE
+        // Put your character image file in the same folder and update the filename below
+        const playerImageFile = './file_00000000d668720cbcbce4985243f5fc.png'; // ← CHANGE THIS!
+        const playerWidth = 80;   // Character width in pixels
+        const playerHeight = 80;  // Character height in pixels
+
+        /* ================================
+           🔊 SOUND CUSTOMIZATION SECTION
+           ================================
+           Replace these URLs with your own music/sound files!
+           Supported formats: .mp3, .wav, .ogg
+           You can use:
+           - Local files: './my-sound.mp3'
+           - Online URLs: 'https://example.com/sound.mp3'
+        */
+        
+        const soundFiles = {
+            // Sound when opening envelope
+            envelopeOpen: 'https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3',
+            
+            // Sound when collecting hearts in game
+            heartCollect: 'https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3',
+            
+            // Background music during game
+            gameMusic: 'https://assets.mixkit.co/active_storage/sfx/2997/2997-preview.mp3',
+            
+            // Victory sound when completing game
+            victory: 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3',
+            
+            // Sound when blowing out candles
+            cakeBlow: 'https://assets.mixkit.co/active_storage/sfx/2015/2015-preview.mp3',
+            
+            // Sound when selecting music option
+            musicSelect: 'https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3',
+            
+            // Final celebration sound
+            celebration: 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3'
+        };
+
+        // 🔊 VOLUME SETTINGS (0.0 to 1.0)
+        const volumes = {
+            envelopeOpen: 0.4,
+            heartCollect: 0.3,
+            gameMusic: 0.2,
+            victory: 0.5,
+            cakeBlow: 0.4,
+            musicSelect: 0.3,
+            celebration: 0.5
+        };
+
+        /* ================================
+           ⚙️ CODE STARTS HERE
+           (Don't modify unless you know what you're doing!)
+           ================================ */
+
+        // Initialize audio
+        const sounds = {};
+        for (let soundName in soundFiles) {
+            sounds[soundName] = new Audio(soundFiles[soundName]);
+            sounds[soundName].volume = volumes[soundName] || 0.5;
+            if (soundName === 'gameMusic') {
+                sounds[soundName].loop = true;
+            }
+        }
+
+        function playSound(soundName) {
+            try {
+                if (sounds[soundName]) {
+                    sounds[soundName].currentTime = 0;
+                    sounds[soundName].play().catch(e => console.log('Sound play failed:', e));
+                }
+            } catch (e) {
+                console.log('Sound error:', e);
+            }
+        }
+
+        function stopSound(soundName) {
+            try {
+                if (sounds[soundName]) {
+                    sounds[soundName].pause();
+                    sounds[soundName].currentTime = 0;
+                }
+            } catch (e) {
+                console.log('Sound stop error:', e);
+            }
+        }
+
         // Secret Code Logic
-        const correctCode = '0101'; // Change this to Beza's birthday (MMDD format)
         const digits = [
             document.getElementById('digit1'),
             document.getElementById('digit2'),
@@ -779,6 +1019,7 @@
         function checkCode() {
             const enteredCode = digits.map(d => d.value).join('');
             if (enteredCode === correctCode) {
+                playSound('envelopeOpen');
                 goToScreen('envelopeScreen');
             } else {
                 errorMsg.classList.add('show');
@@ -800,6 +1041,7 @@
 
         envelopeContainer.addEventListener('click', () => {
             envelope.classList.add('opened');
+            playSound('envelopeOpen');
             setTimeout(() => {
                 goToScreen('gameScreen');
                 initGame();
@@ -812,86 +1054,52 @@
         
         let gameActive = false;
         let score = 0;
-        let timeLeft = 60;
+        let timeLeft = gameTime;
         let gameTimer;
         let player = {
             x: canvas.width / 2,
-            y: canvas.height - 80,
-            width: 60,
-            height: 60,
-            speed: 8
+            y: canvas.height - 100,
+            width: playerWidth,
+            height: playerHeight,
+            speed: playerSpeed
         };
         let hearts = [];
         let keys = {};
         
-        // Load Beza's pixel art image
+        // Load player image
         const playerImage = new Image();
-        playerImage.src = './file_00000000d668720cbcbce4985243f5fc.png';
+        playerImage.src = playerImageFile;
         let imageLoaded = false;
         
         playerImage.onload = function() {
             imageLoaded = true;
-            console.log('Player image loaded successfully!');
+            console.log('✅ Player image loaded successfully!');
         };
         
         playerImage.onerror = function() {
-            console.log('Image failed to load from: ' + playerImage.src);
-            console.log('Using placeholder character instead');
+            console.log('⚠️ Player image failed to load. Using placeholder.');
         };
 
-        // Sound Effects
-        const sounds = {
-            collect: new Audio('https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3'), // Coin collect
-            gameOver: new Audio('https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3'), // Victory fanfare
-            background: new Audio('https://assets.mixkit.co/active_storage/sfx/2997/2997-preview.mp3') // Happy background
-        };
-
-        // Set volumes
-        sounds.collect.volume = 0.3;
-        sounds.gameOver.volume = 0.5;
-        sounds.background.volume = 0.2;
-        sounds.background.loop = true;
-
-        function playSound(soundName) {
-            try {
-                sounds[soundName].currentTime = 0;
-                sounds[soundName].play().catch(e => console.log('Sound play failed:', e));
-            } catch (e) {
-                console.log('Sound error:', e);
-            }
-        }
-
-        // Draw Beza's character
+        // Draw player character
         function drawPlayer() {
             ctx.save();
-            
-            // Disable image smoothing for crisp pixel art
             ctx.imageSmoothingEnabled = false;
             
             if (imageLoaded) {
-                // Draw the actual pixel art image
                 ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
             } else {
-                // Fallback placeholder if image doesn't load
+                // Fallback placeholder
                 ctx.translate(player.x, player.y);
-                
-                // Body
                 ctx.fillStyle = '#FF6B9D';
                 ctx.beginPath();
                 ctx.arc(30, 20, 15, 0, Math.PI * 2);
                 ctx.fill();
-                
-                // Simple body
                 ctx.fillRect(20, 35, 20, 25);
-                
-                // Face
                 ctx.fillStyle = '#2D2D2D';
                 ctx.beginPath();
                 ctx.arc(25, 18, 2, 0, Math.PI * 2);
                 ctx.arc(35, 18, 2, 0, Math.PI * 2);
                 ctx.fill();
-                
-                // Smile
                 ctx.beginPath();
                 ctx.arc(30, 20, 8, 0, Math.PI);
                 ctx.stroke();
@@ -916,7 +1124,6 @@
             ctx.translate(heart.x, heart.y);
             ctx.fillStyle = heart.color;
             
-            // Draw heart shape
             ctx.beginPath();
             ctx.moveTo(15, 10);
             ctx.bezierCurveTo(15, 7, 12, 5, 9, 5);
@@ -942,14 +1149,12 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw background gradient
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             gradient.addColorStop(0, '#E3F2FD');
             gradient.addColorStop(1, '#FFF9F0');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Move player
             if (keys['ArrowLeft'] && player.x > 0) {
                 player.x -= player.speed;
             }
@@ -957,22 +1162,19 @@
                 player.x += player.speed;
             }
 
-            // Draw player
             drawPlayer();
 
-            // Update and draw hearts
             for (let i = hearts.length - 1; i >= 0; i--) {
                 hearts[i].y += hearts[i].speed;
                 drawHeart(hearts[i]);
 
-                // Check collision
                 if (checkCollision(hearts[i])) {
                     score++;
-                    playSound('collect'); // Play collect sound
+                    playSound('heartCollect');
                     document.getElementById('gameScore').textContent = score;
                     hearts.splice(i, 1);
                     
-                    if (score >= 20) {
+                    if (score >= heartsToCollect) {
                         endGame(true);
                         return;
                     }
@@ -981,7 +1183,6 @@
                 }
             }
 
-            // Spawn new hearts
             if (Math.random() < 0.03) {
                 hearts.push(createHeart());
             }
@@ -992,17 +1193,15 @@
         function initGame() {
             gameActive = true;
             score = 0;
-            timeLeft = 60;
+            timeLeft = gameTime;
             hearts = [];
             player.x = canvas.width / 2;
             
             document.getElementById('gameScore').textContent = score;
             document.getElementById('gameTimer').textContent = timeLeft;
 
-            // Play background music
-            playSound('background');
+            playSound('gameMusic');
 
-            // Start timer
             gameTimer = setInterval(() => {
                 timeLeft--;
                 document.getElementById('gameTimer').textContent = timeLeft;
@@ -1019,18 +1218,14 @@
             gameActive = false;
             clearInterval(gameTimer);
             
-            // Stop background music
-            sounds.background.pause();
-            sounds.background.currentTime = 0;
-            
-            // Play victory sound
-            playSound('gameOver');
+            stopSound('gameMusic');
+            playSound('victory');
             
             const gameOverMessage = document.getElementById('gameOverMessage');
             const gameOverText = document.getElementById('gameOverText');
             
             if (won) {
-                gameOverText.textContent = '🎉 Amazing! You collected all 20 hearts!';
+                gameOverText.textContent = `🎉 Amazing! You collected all ${heartsToCollect} hearts!`;
             } else {
                 gameOverText.textContent = `Great job! You collected ${score} hearts! 💖`;
             }
@@ -1039,7 +1234,6 @@
             createConfetti();
         }
 
-        // Keyboard controls
         document.addEventListener('keydown', (e) => {
             keys[e.key] = true;
         });
@@ -1048,7 +1242,6 @@
             keys[e.key] = false;
         });
 
-        // Touch controls for mobile
         let touchStartX = 0;
         canvas.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
@@ -1062,7 +1255,6 @@
             player.x = Math.max(0, Math.min(canvasX - player.width / 2, canvas.width - player.width));
         });
 
-        // Game over button
         document.getElementById('gameOverBtn').addEventListener('click', () => {
             document.getElementById('gameOverMessage').classList.remove('show');
             goToScreen('cakeScreen');
@@ -1076,6 +1268,7 @@
             if (!cakeClicked) {
                 cakeClicked = true;
                 cake.textContent = '🍰';
+                playSound('cakeBlow');
                 createConfetti();
                 
                 setTimeout(() => {
@@ -1084,8 +1277,36 @@
             }
         });
 
-        // Music Selection
+        // Music Selection Logic
+        /* ================================
+           🎵 MUSIC PLAYBACK CUSTOMIZATION
+           ================================
+           Add your favorite songs here!
+           
+           Option 1: Use online music URLs (.mp3 files)
+           Option 2: Use local files (upload .mp3 files to same folder)
+           Option 3: Use YouTube embeds (more complex, see guide)
+           
+           Example:
+           const song1Audio = new Audio('./her-favorite-song.mp3');
+           const song2Audio = new Audio('https://example.com/song.mp3');
+        */
+        
+        // Uncomment and customize these when you have the song files:
+        // const song1Audio = new Audio('./song1.mp3');
+        // const song2Audio = new Audio('./song2.mp3');
+        // const song3Audio = new Audio('./song3.mp3');
+        // const song4Audio = new Audio('./song4.mp3');
+        
         function selectMusic(type) {
+            playSound('musicSelect');
+            
+            // Uncomment the song you want to play based on selection:
+            // if (type === 'song1') { song1Audio.play(); }
+            // if (type === 'song2') { song2Audio.play(); }
+            // if (type === 'song3') { song3Audio.play(); }
+            // if (type === 'song4') { song4Audio.play(); }
+            
             setTimeout(() => {
                 goToScreen('galleryScreen');
             }, 300);
@@ -1118,7 +1339,6 @@
             }
         }
 
-        // Resize canvas for mobile
         function resizeCanvas() {
             const container = canvas.parentElement;
             const maxWidth = Math.min(800, window.innerWidth - 40);
