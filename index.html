@@ -575,7 +575,71 @@
         }
 
         /* Responsive */
+        /* Romantic Rose Petals */
+        .rose-petal {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            z-index: 0;
+            pointer-events: none;
+            animation: petal-fall 8s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes petal-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Romantic Sparkles */
+        .sparkle {
+            position: fixed;
+            z-index: 0;
+            pointer-events: none;
+            animation: sparkle-twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle-twinkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Romantic Quote Box */
+        .love-quote {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 20px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            max-width: 300px;
+            z-index: 5;
+            font-style: italic;
+            color: var(--primary);
+            animation: fadeInQuote 1s ease-out 3s both;
+        }
+
+        @keyframes fadeInQuote {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media (max-width: 768px) {
+            .love-quote {
+                display: none;
+            }
+        }
             .code-digit {
                 width: 50px;
                 height: 60px;
@@ -630,27 +694,67 @@
     <div class="bg-decoration heart heart2"></div>
     <div class="bg-decoration heart heart3"></div>
     
+    <!-- Romantic Rose Petals -->
+    <div class="rose-petal" style="left: 10%; animation-delay: 0s; font-size: 25px;">🌹</div>
+    <div class="rose-petal" style="left: 30%; animation-delay: 2s; font-size: 20px;">🌸</div>
+    <div class="rose-petal" style="left: 50%; animation-delay: 4s; font-size: 22px;">💐</div>
+    <div class="rose-petal" style="left: 70%; animation-delay: 1s; font-size: 24px;">🌺</div>
+    <div class="rose-petal" style="left: 90%; animation-delay: 3s; font-size: 21px;">🌷</div>
+    
+    <!-- Romantic Sparkles -->
+    <div class="sparkle" style="top: 20%; left: 15%; font-size: 30px; animation-delay: 0.5s;">✨</div>
+    <div class="sparkle" style="top: 40%; right: 20%; font-size: 25px; animation-delay: 1.5s;">💫</div>
+    <div class="sparkle" style="top: 60%; left: 80%; font-size: 28px; animation-delay: 2.5s;">⭐</div>
+    <div class="sparkle" style="top: 80%; left: 40%; font-size: 26px; animation-delay: 0.8s;">✨</div>
+    
+    <!-- Romantic Love Quote -->
+    <div class="love-quote">
+        "Good friends are like stars. You don't always see them, but you know they're always there." 💫
+    </div>
+    
+    <!-- 
+    ================================
+    🖼️ CHARACTER IMAGES INSTRUCTIONS
+    ================================
+    To add real Po and Ariel images:
+    
+    1. Download these images:
+       - Kung Fu Panda Po PNG (search Google Images, download transparent PNG)
+       - Little Mermaid Ariel PNG (search Google Images, download transparent PNG)
+    
+    2. Rename them to:
+       - po.png
+       - ariel.png
+    
+    3. Upload to your GitHub repository (same folder as index.html)
+    
+    4. The images will automatically show below!
+    -->
+    
     <!-- Favorite Characters Decorations -->
     <!-- Kung Fu Panda Po -->
-    <img src="https://www.freepnglogos.com/uploads/panda-png/panda-bear-transparent-background-png-arts-35.png" 
-         style="position: fixed; bottom: 20px; right: 20px; width: 150px; z-index: 0; opacity: 0.3; animation: float 8s ease-in-out infinite;" 
-         alt="Panda"
+    <img src="po.png" 
+         style="position: fixed; bottom: 20px; right: 20px; width: 150px; z-index: 0; opacity: 0.4; animation: float 8s ease-in-out infinite;" 
+         alt="Po"
          onerror="this.style.display='none'">
-    <!-- Little Mermaid -->
-    <img src="https://www.pngarts.com/files/3/Mermaid-PNG-High-Quality-Image.png" 
-         style="position: fixed; top: 15%; left: 5%; width: 120px; z-index: 0; opacity: 0.3; animation: float 6s ease-in-out infinite; animation-delay: 1s;" 
-         alt="Mermaid"
+    <!-- Little Mermaid Ariel -->
+    <img src="ariel.png" 
+         style="position: fixed; top: 15%; left: 5%; width: 120px; z-index: 0; opacity: 0.4; animation: float 6s ease-in-out infinite; animation-delay: 1s;" 
+         alt="Ariel"
          onerror="this.style.display='none'">
     <!-- Cute Puppy -->
-    <img src="https://www.pngarts.com/files/4/Cute-Puppy-PNG-Image-Background.png" 
-         style="position: fixed; bottom: 20px; left: 20px; width: 100px; z-index: 0; opacity: 0.4; animation: float 7s ease-in-out infinite; animation-delay: 2s;" 
-         alt="Puppy"
-         onerror="this.style.display='none'">
+    <div style="position: fixed; bottom: 20px; left: 20px; width: 100px; height: 100px; z-index: 0; opacity: 0.5; animation: float 7s ease-in-out infinite; animation-delay: 2s; background: linear-gradient(135deg, #F7971E, #FFD200); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 60px;">
+        🐕
+    </div>
 
     <!-- Screen 1: Secret Code Entry -->
     <div class="screen active code-screen" id="codeScreen">
+        <div style="margin-bottom: 30px; font-size: 4rem;">💝</div>
         <h1>🔐 Secret Code</h1>
         <p>Enter the secret code to unlock Beza's birthday surprise!</p>
+        <p style="font-size: 1.2rem; color: var(--primary); margin-top: 20px; font-style: italic;">
+            "This moment is just for you..." ✨
+        </p>
         <div class="code-input">
             <input type="text" maxlength="1" class="code-digit" id="digit1" autofocus>
             <input type="text" maxlength="1" class="code-digit" id="digit2">
@@ -664,18 +768,21 @@
     <!-- Screen 2: Envelope -->
     <div class="screen envelope-screen" id="envelopeScreen">
         <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 30px;">
-            <img src="https://www.freepnglogos.com/uploads/panda-png/panda-bear-transparent-background-png-arts-35.png" 
-                 style="width: 70px; animation: bounce 2s infinite;" 
-                 alt="Panda"
-                 onerror="this.style.display='none'">
+            <img src="po.png" 
+                 style="width: 80px; animation: bounce 2s infinite;" 
+                 alt="Po"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E🐼%3C/text%3E%3C/svg%3E'">
             <h2 style="font-family: Pacifico, cursive; font-size: 3rem; color: var(--primary); margin: 0;">
                 You've Got Mail! 💌
             </h2>
-            <img src="https://www.pngarts.com/files/3/Mermaid-PNG-High-Quality-Image.png" 
-                 style="width: 60px; animation: bounce 2s infinite; animation-delay: 0.5s;" 
-                 alt="Mermaid"
-                 onerror="this.style.display='none'">
+            <img src="ariel.png" 
+                 style="width: 70px; animation: bounce 2s infinite; animation-delay: 0.5s;" 
+                 alt="Ariel"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E🧜‍♀️%3C/text%3E%3C/svg%3E'">
         </div>
+        <p style="font-size: 1.3rem; color: var(--purple); margin-bottom: 40px; font-style: italic;">
+            "A special birthday surprise from your best friend!" 🎁
+        </p>
         <div class="envelope-container" id="envelopeContainer">
             <div class="envelope" id="envelope">
                 <div class="envelope-flap"></div>
@@ -687,7 +794,10 @@
     <!-- Screen 3: Hearts Collection Game -->
     <div class="screen game-screen" id="gameScreen">
         <h2>Catch the Falling Hearts! 💖</h2>
-        <div class="game-instructions">Use arrow keys or touch to move left and right!</div>
+        <div class="game-instructions">Catch all the hearts for your best friend! 💜</div>
+        <p style="font-size: 1.1rem; color: var(--purple); font-style: italic; margin-bottom: 15px;">
+            "Catch all the birthday love and good vibes!" ✨
+        </p>
         <div class="game-stats">
             <div class="stat score">Score: <span id="gameScore">0</span> / 20</div>
             <div class="stat timer">Time: <span id="gameTimer">60</span>s</div>
@@ -708,6 +818,9 @@
     <!-- Screen 4: Blow the Candle -->
     <div class="screen cake-screen" id="cakeScreen">
         <h2>Make a Wish! ✨</h2>
+        <p style="font-size: 1.4rem; color: var(--purple); margin-bottom: 30px; font-style: italic;">
+            "Close your eyes, make a wish, and know that I'm wishing for all your dreams to come true..." 💫
+        </p>
         <div class="cake" id="cake">🎂</div>
         <div class="candle-instruction">Click the cake to blow out the candles!</div>
     </div>
@@ -715,15 +828,13 @@
     <!-- Screen 5: Choose Music -->
     <div class="screen music-screen" id="musicScreen">
         <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px;">
-            <img src="https://www.pngarts.com/files/4/Cute-Puppy-PNG-Image-Background.png" 
-                 style="width: 60px; animation: bounce 2s infinite;" 
-                 alt="Puppy"
-                 onerror="this.style.display='none'">
+            <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #F7971E, #FFD200); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 45px; animation: bounce 2s infinite;">
+                🐕
+            </div>
             <h2>Choose Your Birthday Vibe 🎵</h2>
-            <img src="https://www.pngarts.com/files/4/Cute-Puppy-PNG-Image-Background.png" 
-                 style="width: 60px; animation: bounce 2s infinite; animation-delay: 0.3s; transform: scaleX(-1);" 
-                 alt="Puppy"
-                 onerror="this.style.display='none'">
+            <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #F7971E, #FFD200); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 45px; animation: bounce 2s infinite; animation-delay: 0.3s;">
+                🐶
+            </div>
         </div>
         <p style="text-align: center; color: var(--purple); margin-bottom: 30px; font-size: 1.1rem;">
             🐕 Pick your favorite song! The puppy approves them all! 🐕
@@ -786,28 +897,26 @@
     <!-- Screen 6: Photo Gallery -->
     <div class="screen gallery-screen" id="galleryScreen">
         <div style="display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 20px;">
-            <img src="https://www.freepnglogos.com/uploads/panda-png/panda-bear-transparent-background-png-arts-35.png" 
+            <img src="po.png" 
                  style="width: 100px; animation: bounce 2s infinite;" 
-                 alt="Panda"
-                 onerror="this.style.display='none'">
+                 alt="Po"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E🐼%3C/text%3E%3C/svg%3E'">
             <h2>Our Beautiful Memories 📸</h2>
-            <img src="https://www.pngarts.com/files/3/Mermaid-PNG-High-Quality-Image.png" 
-                 style="width: 80px; animation: bounce 2s infinite; animation-delay: 0.5s;" 
-                 alt="Mermaid"
-                 onerror="this.style.display='none'">
+            <img src="ariel.png" 
+                 style="width: 90px; animation: bounce 2s infinite; animation-delay: 0.5s;" 
+                 alt="Ariel"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E🧜‍♀️%3C/text%3E%3C/svg%3E'">
         </div>
         
         <!-- Cute Dog Decoration -->
         <div style="text-align: center; margin-bottom: 30px;">
-            <img src="https://www.pngarts.com/files/4/Cute-Puppy-PNG-Image-Background.png" 
-                 style="width: 80px; display: inline-block; animation: bounce 2s infinite;" 
-                 alt="Puppy"
-                 onerror="this.style.display='none'">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #F7971E, #FFD200); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 50px; animation: bounce 2s infinite;">
+                🐕
+            </div>
             <span style="font-family: Pacifico, cursive; font-size: 1.5rem; color: var(--primary); margin: 0 20px;">🐕 Puppy approved memories! 🐕</span>
-            <img src="https://www.pngarts.com/files/4/Cute-Puppy-PNG-Image-Background.png" 
-                 style="width: 80px; display: inline-block; animation: bounce 2s infinite; animation-delay: 0.3s; transform: scaleX(-1);" 
-                 alt="Puppy"
-                 onerror="this.style.display='none'">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #F7971E, #FFD200); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 50px; animation: bounce 2s infinite; animation-delay: 0.3s;">
+                🐶
+            </div>
         </div>
         
         <div class="gallery-grid">
@@ -821,33 +930,33 @@
             <!-- PHOTO 1 -->
             <div class="photo-card">
                 <div class="photo-placeholder">
-                    <img src="IMG_20260221_204036_855.jpg" alt="Our First Memory">
+                    <img src="IMG_20260221_204036_855.jpg" alt="You & Me">
                 </div>
-                <div class="caption">Our First Memory</div>
+                <div class="caption">You & Me 💕</div>
             </div>
             
             <!-- PHOTO 2 -->
             <div class="photo-card">
                 <div class="photo-placeholder">
-                    <img src="IMG_20260221_204041_545.jpg" alt="Sweet Moments">
+                    <img src="IMG_20260221_204041_545.jpg" alt="Forever Together">
                 </div>
-                <div class="caption">Sweet Moments</div>
+                <div class="caption">Forever Together 💖</div>
             </div>
             
             <!-- PHOTO 3 -->
             <div class="photo-card">
                 <div class="photo-placeholder">
-                    <img src="IMG_20260221_204046_764.jpg" alt="Beautiful Day">
+                    <img src="IMG_20260221_204046_764.jpg" alt="My Happy Place">
                 </div>
-                <div class="caption">Beautiful Day</div>
+                <div class="caption">My Happy Place 😊</div>
             </div>
             
             <!-- PHOTO 4 -->
             <div class="photo-card">
                 <div class="photo-placeholder">
-                    <img src="IMG_20260221_204127_555.jpg" alt="Forever Us">
+                    <img src="IMG_20260221_204127_555.jpg" alt="Love of My Life">
                 </div>
-                <div class="caption">Forever Us</div>
+                <div class="caption">Love of My Life ❤️</div>
             </div>
             
             <!-- 
@@ -867,23 +976,78 @@
                 <div class="caption">Our Special Video</div>
             </div>
         </div>
-        <button class="continue-btn gallery-continue-btn" onclick="goToScreen('finalScreen'); createConfetti(); playSound('celebration');">
-            Continue to Final Message 💝
+        <button class="continue-btn gallery-continue-btn" onclick="goToScreen('reasonsScreen'); createConfetti(); playSound('celebration');">
+            Continue to Next Surprise 💜
+        </button>
+    </div>
+
+    <!-- Screen 6.5: Why You're The Best Friend -->
+    <div class="screen" id="reasonsScreen" style="text-align: center; max-width: 900px;">
+        <h2 style="font-family: Pacifico, cursive; font-size: clamp(2.5rem, 6vw, 4rem); color: var(--primary); margin-bottom: 50px;">
+            💜 Why You're The BEST Friend 💜
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 50px;">
+            <!-- Reason 1 -->
+            <div style="background: linear-gradient(135deg, #FF6B9D, #FF8E53); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3); animation: fadeIn 0.6s ease-out 0.2s both;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">😂</div>
+                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 10px;">You're Hilarious</h3>
+                <p style="color: white; opacity: 0.95;">Nobody makes me laugh like you do - you're comedy gold!</p>
+            </div>
+            
+            <!-- Reason 2 -->
+            <div style="background: linear-gradient(135deg, #FEC84E, #F7971E); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(254, 200, 78, 0.3); animation: fadeIn 0.6s ease-out 0.4s both;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">💯</div>
+                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 10px;">You Keep It Real</h3>
+                <p style="color: white; opacity: 0.95;">You always keep it 100 and tell me what I need to hear</p>
+            </div>
+            
+            <!-- Reason 3 -->
+            <div style="background: linear-gradient(135deg, #A0E7E5, #4ECDC4); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(160, 231, 229, 0.3); animation: fadeIn 0.6s ease-out 0.6s both;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🎯</div>
+                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 10px;">Always Got My Back</h3>
+                <p style="color: white; opacity: 0.95;">Through everything, you're my ride or die, no matter what</p>
+            </div>
+            
+            <!-- Reason 4 -->
+            <div style="background: linear-gradient(135deg, #B4A7D6, #9A8CC7); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(180, 167, 214, 0.3); animation: fadeIn 0.6s ease-out 0.8s both;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🔥</div>
+                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 10px;">You're Amazing</h3>
+                <p style="color: white; opacity: 0.95;">You inspire me to be better and chase my dreams</p>
+            </div>
+            
+            <!-- Reason 5 -->
+            <div style="background: linear-gradient(135deg, #FF758C, #FF7EB3); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 117, 140, 0.3); animation: fadeIn 0.6s ease-out 1s both;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🤝</div>
+                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 10px;">Best Adventures</h3>
+                <p style="color: white; opacity: 0.95;">Every moment with you becomes an unforgettable memory</p>
+            </div>
+            
+            <!-- Reason 6 -->
+            <div style="background: linear-gradient(135deg, #667EEA, #764BA2); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); animation: fadeIn 0.6s ease-out 1.2s both;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">👑</div>
+                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 10px;">Simply The Best</h3>
+                <p style="color: white; opacity: 0.95;">You're the best friend anyone could ever ask for, period!</p>
+            </div>
+        </div>
+        
+        <button class="continue-btn" onclick="goToScreen('finalScreen'); createConfetti(); playSound('celebration');" style="animation: fadeIn 1s ease-out 1.5s both;">
+            Continue to Final Message 🎉
         </button>
     </div>
 
     <!-- Screen 7: Final Message -->
     <div class="screen final-screen" id="finalScreen">
         <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px;">
-            <img src="https://www.freepnglogos.com/uploads/panda-png/panda-bear-transparent-background-png-arts-35.png" 
-                 style="width: 80px; animation: bounce 2s infinite;" 
-                 alt="Panda"
-                 onerror="this.style.display='none'">
+            <img src="po.png" 
+                 style="width: 90px; animation: bounce 2s infinite;" 
+                 alt="Po"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E🐼%3C/text%3E%3C/svg%3E'">
             <h1>Happy Birthday Beza! 🎉</h1>
-            <img src="https://www.pngarts.com/files/3/Mermaid-PNG-High-Quality-Image.png" 
-                 style="width: 70px; animation: bounce 2s infinite; animation-delay: 0.3s;" 
-                 alt="Mermaid"
-                 onerror="this.style.display='none'">
+            <img src="ariel.png" 
+                 style="width: 80px; animation: bounce 2s infinite; animation-delay: 0.3s;" 
+                 alt="Ariel"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E🧜‍♀️%3C/text%3E%3C/svg%3E'">
         </div>
         <div class="message-box">
             <!-- 
@@ -892,15 +1056,24 @@
             ================================
             Edit the text below to personalize your birthday message!
             -->
-            <p>Dear Beza,</p>
-            <p>Happy birthday to the most amazing person in my world! I hope this little journey brought a smile to your face, because that's what you do for me every single day.</p>
-            <p>You light up my life in ways I never imagined possible. Your laughter is my favorite sound, your smile is my favorite sight, and spending time with you is my favorite thing to do.</p>
-            <p>On your special day, I want you to know how incredibly grateful I am to have you in my life. You make every moment sweeter, every day brighter, and every challenge easier.</p>
-            <p>Here's to another year of beautiful memories, endless laughter, and all the love in the world. You deserve everything wonderful today and always!</p>
-            <p>I love you more than words can express. Thank you for being you. 💖</p>
-            <div class="signature">Forever yours ❤️</div>
+            <p>Hey Beza!</p>
+            <p>Happy birthday to my absolute best friend! I can't believe it's your special day already - time flies when you're having the best times with your favorite person!</p>
+            <p>You're literally the most amazing friend anyone could ask for. From the moment we became friends, my life got so much better. You're always there when I need you, you make me laugh until my stomach hurts, and you just GET me, you know?</p>
+            <p>I love how we can be completely ourselves around each other - no filters, no pretending, just real friendship. Whether we're having deep talks at 2am or being completely ridiculous together, every moment with you is unforgettable.</p>
+            <p>You're strong, you're hilarious, you're kind, and you're one of the realest people I know. I'm so grateful to have you as my best friend, my partner in crime, and my day one.</p>
+            <p>On your birthday, I want you to know how much you mean to me. You deserve all the happiness, success, good vibes, and amazing things coming your way this year!</p>
+            <p>Here's to another year of incredible adventures, inside jokes, late-night talks, unforgettable memories, and being each other's ride or die. You and me against the world, always!</p>
+            <p>Thanks for being the best friend a person could have. Love you so much, homie! 💯</p>
+            <p style="font-size: 1.6rem; color: var(--primary); font-weight: 700; margin-top: 30px;">Happy Birthday Beza! Let's make this year EPIC! 🎉🎂✨</p>
+            <div class="signature">Your Best Friend Forever 💜</div>
         </div>
-        <div class="celebration">🎊 🎈 🎁 🎉 ✨</div>
+        <div class="celebration">🎊 🎈 🎁 🎉 ✨ 💜 🎂 🥳</div>
+        <div style="margin-top: 40px; font-size: 1.3rem; color: var(--purple); font-style: italic;">
+            "Best friends forever! Here's to many more birthdays together!" 💜
+        </div>
+        <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; font-size: 2.5rem;">
+            👯 🤝 💪 🔥 ⭐ 👑 💯 ✨
+        </div>
     </div>
 
     <script>
@@ -910,7 +1083,7 @@
 
         // 🔑 SECRET CODE - Change this to her birthday (MMDD format)
         // Example: March 15 = '0315', December 25 = '1225'
-        const correctCode = '0101'; // ← CHANGE THIS!
+        const correctCode = '2468'; // ← CHANGED TO 2468!
 
         // ⏱️ GAME SETTINGS
         const heartsToCollect = 20;  // How many hearts to win
@@ -1298,33 +1471,47 @@
 
         // Music Selection Logic
         /* ================================
-           🎵 MUSIC PLAYBACK CUSTOMIZATION
+           🎵 MUSIC PLAYBACK - Using .m4a files from your GitHub
            ================================
-           Add your favorite songs here!
-           
-           Option 1: Use online music URLs (.mp3 files)
-           Option 2: Use local files (upload .mp3 files to same folder)
-           Option 3: Use YouTube embeds (more complex, see guide)
-           
-           Example:
-           const song1Audio = new Audio('./her-favorite-song.mp3');
-           const song2Audio = new Audio('https://example.com/song.mp3');
         */
         
-        // Uncomment and customize these when you have the song files:
-        // const song1Audio = new Audio('./song1.mp3');
-        // const song2Audio = new Audio('./song2.mp3');
-        // const song3Audio = new Audio('./song3.mp3');
-        // const song4Audio = new Audio('./song4.mp3');
+        // Your exact music filenames from GitHub (all .m4a format):
+        const song1Audio = new Audio('Go Crazy Young Thug Chris Brown.m4a');
+        const song2Audio = new Audio('Mind Games Sickick.m4a');
+        const song3Audio = new Audio('Shemanefew Mikaya Behailu.m4a');
+        const song4Audio = new Audio('Tsedenia Gebremarkos.m4a');
+        
+        // Set volume for all songs
+        [song1Audio, song2Audio, song3Audio, song4Audio].forEach(audio => {
+            audio.volume = 0.5;
+        });
         
         function selectMusic(type) {
             playSound('musicSelect');
             
-            // Uncomment the song you want to play based on selection:
-            // if (type === 'song1') { song1Audio.play(); }
-            // if (type === 'song2') { song2Audio.play(); }
-            // if (type === 'song3') { song3Audio.play(); }
-            // if (type === 'song4') { song4Audio.play(); }
+            // Stop all other songs first
+            [song1Audio, song2Audio, song3Audio, song4Audio].forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            
+            // Play the selected song
+            try {
+                if (type === 'song1') { 
+                    song1Audio.play().catch(e => console.log('Song 1 play error:', e));
+                }
+                if (type === 'song2') { 
+                    song2Audio.play().catch(e => console.log('Song 2 play error:', e));
+                }
+                if (type === 'song3') { 
+                    song3Audio.play().catch(e => console.log('Song 3 play error:', e));
+                }
+                if (type === 'song4') { 
+                    song4Audio.play().catch(e => console.log('Song 4 play error:', e));
+                }
+            } catch (e) {
+                console.log('Music playback error:', e);
+            }
             
             setTimeout(() => {
                 goToScreen('galleryScreen');
