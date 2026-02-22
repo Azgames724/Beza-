@@ -574,6 +574,39 @@
             }
         }
 
+        /* Shake Animation for Wrong Code */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        /* Pulse Animation */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 157, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 107, 157, 0.6); }
+        }
+
+        /* Button Hover Effects */
+        .continue-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5);
+            animation: pulseGlow 1.5s infinite;
+        }
+
+        .music-option:hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 30px rgba(254, 200, 78, 0.3);
+        }
+
+        /* Photo Card Hover Enhanced */
+        .photo-card:hover {
+            transform: rotate(0deg) scale(1.08);
+            box-shadow: 0 25px 60px rgba(255, 107, 157, 0.4);
+            z-index: 10;
+        }
+
         /* Responsive */
         /* Romantic Rose Petals */
         .rose-petal {
@@ -635,7 +668,119 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Volume Control Button */
+        .volume-control {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .volume-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5);
+        }
+
+        .volume-control:active {
+            transform: scale(0.95);
+        }
+
+        /* Music Player Control */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #FF6B9D, #FEC84E);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 3px solid white;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        .music-player:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        .music-player.active {
+            display: flex;
+        }
+
+        .music-player-icon {
+            font-size: 2rem;
+            animation: bounce 1s infinite;
+        }
+
+        .music-player-info {
+            color: white;
+            text-align: left;
+        }
+
+        .music-player-song {
+            font-weight: 700;
+            font-size: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .music-player-artist {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(200px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         @media (max-width: 768px) {
+            .volume-control {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 15px;
+                left: 15px;
+            }
+            
+            .music-player {
+                bottom: 80px;
+                right: 15px;
+                padding: 12px 20px;
+                max-width: calc(100vw - 100px);
+            }
+            
+            .music-player-song {
+                font-size: 0.9rem;
+            }
+            
+            .music-player-artist {
+                font-size: 0.7rem;
+            }
+        }
             .love-quote {
                 display: none;
             }
@@ -689,10 +834,62 @@
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #FF6B9D, #FEC84E, #A0E7E5, #B4A7D6);
+        background-size: 400% 400%;
+        animation: gradient 3s ease infinite;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        transition: opacity 0.5s ease-out;
+    ">
+        <div style="font-size: 6rem; margin-bottom: 30px; animation: bounce 1s infinite;">🎉</div>
+        <h1 style="font-family: Pacifico, cursive; font-size: 3rem; color: white; text-shadow: 3px 3px 6px rgba(0,0,0,0.3); margin-bottom: 20px;">
+            Loading Birthday Magic...
+        </h1>
+        <div style="width: 200px; height: 6px; background: rgba(255,255,255,0.3); border-radius: 10px; overflow: hidden;">
+            <div style="width: 0%; height: 100%; background: white; border-radius: 10px; animation: loading 2s ease-out forwards;"></div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
     <!-- Background Decorations -->
     <div class="bg-decoration heart heart1"></div>
     <div class="bg-decoration heart heart2"></div>
     <div class="bg-decoration heart heart3"></div>
+    
+    <!-- Volume Control -->
+    <div class="volume-control" id="volumeControl" onclick="toggleVolume()" title="Toggle Sound">
+        🔊
+    </div>
+    
+    <!-- Music Player Control -->
+    <div class="music-player" id="musicPlayer" onclick="toggleMusicPlayback()">
+        <div class="music-player-icon">🎵</div>
+        <div class="music-player-info">
+            <div class="music-player-song" id="currentSongName">Now Playing</div>
+            <div class="music-player-artist" id="currentArtistName">Click to pause</div>
+        </div>
+    </div>
     
     <!-- Romantic Rose Petals -->
     <div class="rose-petal" style="left: 10%; animation-delay: 0s; font-size: 25px;">🌹</div>
@@ -976,7 +1173,7 @@
                 <div class="caption">Our Special Video</div>
             </div>
         </div>
-        <button class="continue-btn gallery-continue-btn" onclick="goToScreen('reasonsScreen'); createConfetti(); playSound('celebration');">
+        <button class="continue-btn gallery-continue-btn" onclick="playSound('buttonClick'); goToScreen('reasonsScreen'); createConfetti(); playSound('celebration');">
             Continue to Next Surprise 💜
         </button>
     </div>
@@ -1031,7 +1228,7 @@
             </div>
         </div>
         
-        <button class="continue-btn" onclick="goToScreen('finalScreen'); createConfetti(); playSound('celebration');" style="animation: fadeIn 1s ease-out 1.5s both;">
+        <button class="continue-btn" onclick="playSound('buttonClick'); goToScreen('finalScreen'); createConfetti(); playSound('celebration');" style="animation: fadeIn 1s ease-out 1.5s both;">
             Continue to Final Message 🎉
         </button>
     </div>
@@ -1130,18 +1327,38 @@
             musicSelect: 'https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3',
             
             // Final celebration sound
-            celebration: 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3'
+            celebration: 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3',
+            
+            // Button click sounds
+            buttonClick: 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3',
+            
+            // Success chime
+            success: 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3',
+            
+            // Code entry sound
+            codeBeep: 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3',
+            
+            // Wrong code sound
+            wrongCode: 'https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3',
+            
+            // Screen transition
+            transition: 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3'
         };
 
         // 🔊 VOLUME SETTINGS (0.0 to 1.0)
         const volumes = {
-            envelopeOpen: 0.4,
-            heartCollect: 0.3,
-            gameMusic: 0.2,
-            victory: 0.5,
-            cakeBlow: 0.4,
-            musicSelect: 0.3,
-            celebration: 0.5
+            envelopeOpen: 0.5,
+            heartCollect: 0.4,
+            gameMusic: 0.15,
+            victory: 0.6,
+            cakeBlow: 0.5,
+            musicSelect: 0.4,
+            celebration: 0.6,
+            buttonClick: 0.3,
+            success: 0.5,
+            codeBeep: 0.3,
+            wrongCode: 0.4,
+            transition: 0.3
         };
 
         /* ================================
@@ -1180,6 +1397,62 @@
                 console.log('Sound stop error:', e);
             }
         }
+        
+        // Volume Control
+        let soundsEnabled = true;
+        
+        function toggleVolume() {
+            soundsEnabled = !soundsEnabled;
+            const volumeBtn = document.getElementById('volumeControl');
+            
+            if (soundsEnabled) {
+                volumeBtn.textContent = '🔊';
+                volumeBtn.title = 'Mute Sound';
+                // Restore volumes
+                for (let soundName in sounds) {
+                    sounds[soundName].volume = volumes[soundName] || 0.5;
+                }
+            } else {
+                volumeBtn.textContent = '🔇';
+                volumeBtn.title = 'Unmute Sound';
+                // Mute all sounds
+                for (let soundName in sounds) {
+                    sounds[soundName].volume = 0;
+                }
+                // Also mute music
+                if (currentlyPlaying) {
+                    currentlyPlaying.volume = 0;
+                }
+            }
+        }
+        
+        // Music Player Control
+        function toggleMusicPlayback() {
+            if (!currentlyPlaying) return;
+            
+            const musicPlayer = document.getElementById('musicPlayer');
+            const icon = musicPlayer.querySelector('.music-player-icon');
+            const artistEl = document.getElementById('currentArtistName');
+            
+            if (currentlyPlaying.paused) {
+                currentlyPlaying.play()
+                    .then(() => {
+                        icon.textContent = '🎵';
+                        icon.style.animation = 'bounce 1s infinite';
+                        const artistText = artistEl.textContent.split(' •')[0];
+                        artistEl.textContent = artistText + ' • Click to pause';
+                        playSound('buttonClick');
+                    })
+                    .catch(e => console.log('Resume error:', e));
+            } else {
+                currentlyPlaying.pause();
+                icon.textContent = '⏸️';
+                icon.style.animation = 'none';
+                const artistText = artistEl.textContent.split(' •')[0];
+                artistEl.textContent = artistText + ' • Click to play';
+                playSound('buttonClick');
+            }
+        }
 
         // Secret Code Logic
         const digits = [
@@ -1192,6 +1465,16 @@
 
         digits.forEach((digit, index) => {
             digit.addEventListener('input', (e) => {
+                // Play beep sound on input
+                playSound('codeBeep');
+                
+                // Add visual feedback
+                digit.style.transform = 'scale(1.1)';
+                digit.style.borderColor = 'var(--secondary)';
+                setTimeout(() => {
+                    digit.style.transform = 'scale(1)';
+                }, 200);
+                
                 if (e.target.value.length === 1 && index < 3) {
                     digits[index + 1].focus();
                 }
@@ -1211,13 +1494,56 @@
         function checkCode() {
             const enteredCode = digits.map(d => d.value).join('');
             if (enteredCode === correctCode) {
-                playSound('envelopeOpen');
-                goToScreen('envelopeScreen');
+                // Success!
+                playSound('success');
+                digits.forEach(d => {
+                    d.style.borderColor = '#4CAF50';
+                    d.style.backgroundColor = '#E8F5E9';
+                });
+                
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: white;
+                    padding: 40px;
+                    border-radius: 20px;
+                    border: 4px solid #4CAF50;
+                    box-shadow: 0 20px 50px rgba(76, 175, 80, 0.4);
+                    z-index: 1000;
+                    text-align: center;
+                    animation: fadeIn 0.3s ease-out;
+                `;
+                successMsg.innerHTML = `
+                    <div style="font-size: 4rem; margin-bottom: 15px;">✅</div>
+                    <div style="font-size: 1.8rem; color: #4CAF50; font-weight: 700;">
+                        Welcome Beza!
+                    </div>
+                `;
+                document.body.appendChild(successMsg);
+                
+                setTimeout(() => {
+                    successMsg.remove();
+                    goToScreen('envelopeScreen');
+                }, 1500);
             } else {
+                // Wrong code
+                playSound('wrongCode');
                 errorMsg.classList.add('show');
                 digits.forEach(d => {
                     d.style.borderColor = 'var(--primary)';
+                    d.style.backgroundColor = '#FFEBEE';
                     d.value = '';
+                    
+                    // Shake animation
+                    d.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        d.style.animation = '';
+                        d.style.backgroundColor = 'white';
+                    }, 500);
                 });
                 digits[0].focus();
                 
@@ -1227,13 +1553,34 @@
             }
         }
 
-        // Envelope Logic
+        // Envelope Logic with Enhanced Feedback
         const envelope = document.getElementById('envelope');
         const envelopeContainer = document.getElementById('envelopeContainer');
 
         envelopeContainer.addEventListener('click', () => {
-            envelope.classList.add('opened');
             playSound('envelopeOpen');
+            envelope.classList.add('opened');
+            
+            // Add sparkle effect
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.style.cssText = `
+                        position: fixed;
+                        left: ${envelopeContainer.getBoundingClientRect().left + Math.random() * 200}px;
+                        top: ${envelopeContainer.getBoundingClientRect().top + Math.random() * 150}px;
+                        font-size: ${20 + Math.random() * 20}px;
+                        z-index: 1000;
+                        animation: sparkle-twinkle 1s ease-out forwards;
+                        pointer-events: none;
+                    `;
+                    sparkle.textContent = ['✨', '💫', '⭐'][Math.floor(Math.random() * 3)];
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => sparkle.remove(), 1000);
+                }, i * 50);
+            }
+            
             setTimeout(() => {
                 goToScreen('gameScreen');
                 initGame();
@@ -1448,82 +1795,286 @@
         });
 
         document.getElementById('gameOverBtn').addEventListener('click', () => {
+            playSound('buttonClick');
             document.getElementById('gameOverMessage').classList.remove('show');
             goToScreen('cakeScreen');
         });
 
-        // Cake Logic
+        // Cake Logic with Enhanced Effects
         const cake = document.getElementById('cake');
         let cakeClicked = false;
 
         cake.addEventListener('click', () => {
             if (!cakeClicked) {
                 cakeClicked = true;
-                cake.textContent = '🍰';
                 playSound('cakeBlow');
+                
+                // Animate candles blowing out
+                cake.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    cake.textContent = '🍰';
+                    cake.style.transform = 'scale(1)';
+                }, 200);
+                
+                // Create smoke/wind effect
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        const smoke = document.createElement('div');
+                        smoke.style.cssText = `
+                            position: fixed;
+                            left: ${cake.getBoundingClientRect().left + 100}px;
+                            top: ${cake.getBoundingClientRect().top + 50}px;
+                            font-size: 30px;
+                            z-index: 1000;
+                            animation: float 2s ease-out forwards;
+                            pointer-events: none;
+                            opacity: 0.8;
+                        `;
+                        smoke.textContent = '💨';
+                        document.body.appendChild(smoke);
+                        
+                        setTimeout(() => smoke.remove(), 2000);
+                    }, i * 100);
+                }
+                
                 createConfetti();
                 
                 setTimeout(() => {
                     goToScreen('musicScreen');
-                }, 2000);
+                }, 2500);
             }
         });
 
-        // Music Selection Logic
+        // Music Selection Logic - FIXED VERSION WITH AUTOPLAY HANDLING
         /* ================================
            🎵 MUSIC PLAYBACK - Using .m4a files from your GitHub
+           Browser autoplay policies require user interaction to play music.
+           This version handles that properly!
            ================================
         */
         
-        // Your exact music filenames from GitHub (all .m4a format):
-        const song1Audio = new Audio('Go Crazy Young Thug Chris Brown.m4a');
-        const song2Audio = new Audio('Mind Games Sickick.m4a');
-        const song3Audio = new Audio('Shemanefew Mikaya Behailu.m4a');
-        const song4Audio = new Audio('Tsedenia Gebremarkos.m4a');
+        // Create audio objects
+        let song1Audio = null;
+        let song2Audio = null;
+        let song3Audio = null;
+        let song4Audio = null;
+        let currentlyPlaying = null;
         
-        // Set volume for all songs
-        [song1Audio, song2Audio, song3Audio, song4Audio].forEach(audio => {
-            audio.volume = 0.5;
-        });
+        // Initialize audio when user first interacts
+        function initAudio() {
+            if (!song1Audio) {
+                song1Audio = new Audio('Go Crazy Young Thug Chris Brown.m4a');
+                song2Audio = new Audio('Mind Games Sickick.m4a');
+                song3Audio = new Audio('Shemanefew Mikaya Behailu.m4a');
+                song4Audio = new Audio('Tsedenia Gebremarkos.m4a');
+                
+                [song1Audio, song2Audio, song3Audio, song4Audio].forEach((audio, index) => {
+                    audio.volume = 0.6;
+                    audio.loop = false;
+                    
+                    audio.addEventListener('loadeddata', () => {
+                        console.log(`✅ Song ${index + 1} loaded and ready!`);
+                    });
+                    
+                    audio.addEventListener('error', (e) => {
+                        console.error(`❌ Song ${index + 1} error:`, audio.error);
+                    });
+                    
+                    audio.addEventListener('canplaythrough', () => {
+                        console.log(`🎵 Song ${index + 1} can play through!`);
+                    });
+                });
+                
+                console.log('🎵 All audio initialized!');
+            }
+        }
         
         function selectMusic(type) {
+            // Initialize audio on first interaction
+            initAudio();
+            
             playSound('musicSelect');
             
-            // Stop all other songs first
-            [song1Audio, song2Audio, song3Audio, song4Audio].forEach(audio => {
-                audio.pause();
-                audio.currentTime = 0;
-            });
+            // Stop all other songs
+            if (song1Audio) song1Audio.pause();
+            if (song2Audio) song2Audio.pause();
+            if (song3Audio) song3Audio.pause();
+            if (song4Audio) song4Audio.pause();
             
-            // Play the selected song
-            try {
-                if (type === 'song1') { 
-                    song1Audio.play().catch(e => console.log('Song 1 play error:', e));
+            // Get selected audio and info
+            let selectedAudio;
+            let songName = '';
+            let artistName = '';
+            
+            switch(type) {
+                case 'song1':
+                    selectedAudio = song1Audio;
+                    songName = 'Go Crazy';
+                    artistName = 'Young Thug & Chris Brown';
+                    break;
+                case 'song2':
+                    selectedAudio = song2Audio;
+                    songName = 'Mind Games';
+                    artistName = 'Sickick';
+                    break;
+                case 'song3':
+                    selectedAudio = song3Audio;
+                    songName = 'Shemanefew Mikaya';
+                    artistName = 'Behailu';
+                    break;
+                case 'song4':
+                    selectedAudio = song4Audio;
+                    songName = 'Tsedenia Gebremarkos';
+                    artistName = 'Ethiopian Music';
+                    break;
+            }
+            
+            // Create loading popup
+            const musicPopup = document.createElement('div');
+            musicPopup.id = 'musicPopup';
+            musicPopup.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #FF6B9D, #FEC84E);
+                padding: 40px 60px;
+                border-radius: 30px;
+                border: 5px solid white;
+                box-shadow: 0 30px 60px rgba(255, 107, 157, 0.5);
+                z-index: 10000;
+                text-align: center;
+                animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            `;
+            
+            musicPopup.innerHTML = `
+                <div style="font-size: 4rem; margin-bottom: 20px; animation: bounce 1s infinite;">🎵</div>
+                <div style="font-size: 2rem; color: white; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); margin-bottom: 10px;">
+                    ${songName}
+                </div>
+                <div style="font-size: 1.2rem; color: white; opacity: 0.9; margin-bottom: 20px;">
+                    ${artistName}
+                </div>
+                <div id="musicStatus" style="font-size: 1rem; color: white; padding: 10px 20px; background: rgba(255,255,255,0.3); border-radius: 20px;">
+                    Loading...
+                </div>
+            `;
+            
+            document.body.appendChild(musicPopup);
+            
+            // Add pop-in animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes popIn {
+                    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+                    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
                 }
-                if (type === 'song2') { 
-                    song2Audio.play().catch(e => console.log('Song 2 play error:', e));
+            `;
+            document.head.appendChild(style);
+            
+            // Try to play the music
+            if (selectedAudio) {
+                console.log(`🎵 Attempting to play: ${songName}`);
+                
+                selectedAudio.currentTime = 0;
+                
+                const playPromise = selectedAudio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            console.log(`✅ ${songName} IS NOW PLAYING!`);
+                            currentlyPlaying = selectedAudio;
+                            
+                            // Show music player control
+                            const musicPlayer = document.getElementById('musicPlayer');
+                            const songNameEl = document.getElementById('currentSongName');
+                            const artistNameEl = document.getElementById('currentArtistName');
+                            
+                            musicPlayer.classList.add('active');
+                            songNameEl.textContent = songName;
+                            artistNameEl.textContent = artistName + ' • Click to pause';
+                            
+                            // Update status to playing
+                            const statusDiv = document.getElementById('musicStatus');
+                            if (statusDiv) {
+                                statusDiv.innerHTML = '🎶 Playing! Enjoy! 🎶';
+                                statusDiv.style.background = 'rgba(255,255,255,0.5)';
+                            }
+                            
+                            // Keep popup visible longer so user sees it's playing
+                            setTimeout(() => {
+                                musicPopup.style.animation = 'fadeOut 0.5s forwards';
+                                setTimeout(() => {
+                                    musicPopup.remove();
+                                    goToScreen('galleryScreen');
+                                }, 500);
+                            }, 2500);
+                        })
+                        .catch(error => {
+                            console.error(`❌ Error playing ${songName}:`, error);
+                            
+                            // Show error message
+                            const statusDiv = document.getElementById('musicStatus');
+                            if (statusDiv) {
+                                statusDiv.innerHTML = `
+                                    ⚠️ Couldn't play song<br>
+                                    <small style="font-size: 0.8rem;">Check if file exists in GitHub</small>
+                                `;
+                                statusDiv.style.background = 'rgba(255,0,0,0.3)';
+                            }
+                            
+                            // Still continue after error
+                            setTimeout(() => {
+                                musicPopup.style.animation = 'fadeOut 0.5s forwards';
+                                setTimeout(() => {
+                                    musicPopup.remove();
+                                    goToScreen('galleryScreen');
+                                }, 500);
+                            }, 3000);
+                        });
                 }
-                if (type === 'song3') { 
-                    song3Audio.play().catch(e => console.log('Song 3 play error:', e));
-                }
-                if (type === 'song4') { 
-                    song4Audio.play().catch(e => console.log('Song 4 play error:', e));
-                }
-            } catch (e) {
-                console.log('Music playback error:', e);
+            } else {
+                setTimeout(() => {
+                    musicPopup.remove();
+                    goToScreen('galleryScreen');
+                }, 1500);
+            }
+        }
+        
+        // Add fadeOut animation
+        const fadeOutStyle = document.createElement('style');
+        fadeOutStyle.textContent = `
+            @keyframes fadeOut {
+                to { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            }
+        `;
+        document.head.appendChild(fadeOutStyle);
+
+        // Screen Navigation with Sound Effects
+        function goToScreen(screenId) {
+            playSound('transition');
+            
+            // Fade out current screen
+            const currentScreen = document.querySelector('.screen.active');
+            if (currentScreen) {
+                currentScreen.style.opacity = '0';
+                currentScreen.style.transform = 'scale(0.95)';
             }
             
             setTimeout(() => {
-                goToScreen('galleryScreen');
+                document.querySelectorAll('.screen').forEach(screen => {
+                    screen.classList.remove('active');
+                    screen.style.opacity = '';
+                    screen.style.transform = '';
+                });
+                
+                const newScreen = document.getElementById(screenId);
+                newScreen.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 300);
-        }
-
-        // Screen Navigation
-        function goToScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
         }
 
         // Confetti Effect
@@ -1554,6 +2105,17 @@
 
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
+        
+        // Hide loading screen when page is ready
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 500);
+            }, 2000); // Show for 2 seconds minimum
+        });
     </script>
 </body>
 </html>
