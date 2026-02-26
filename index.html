@@ -606,6 +606,16 @@
             box-shadow: 0 25px 60px rgba(255, 107, 157, 0.4);
             z-index: 10;
         }
+        
+        /* Video in gallery */
+        .photo-card video {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-card video:hover {
+            transform: scale(1.02);
+        }
 
         /* Responsive */
         /* Romantic Rose Petals */
@@ -1175,8 +1185,8 @@
             <div class="music-option" onclick="selectMusic('song1')">
                 <span class="music-icon">🎵</span>
                 <div>
-                    <strong>Go Crazy</strong><br>
-                    <small style="opacity: 0.7;">Young Thug & Chris Brown</small>
+                    <strong>Music Track 1</strong><br>
+                    <small style="opacity: 0.7;">Birthday Vibes</small>
                 </div>
             </div>
             
@@ -1184,8 +1194,8 @@
             <div class="music-option" onclick="selectMusic('song2')">
                 <span class="music-icon">💖</span>
                 <div>
-                    <strong>Mind Games</strong><br>
-                    <small style="opacity: 0.7;">Sickick</small>
+                    <strong>Music Track 2</strong><br>
+                    <small style="opacity: 0.7;">Feel Good Music</small>
                 </div>
             </div>
             
@@ -1193,8 +1203,8 @@
             <div class="music-option" onclick="selectMusic('song3')">
                 <span class="music-icon">✨</span>
                 <div>
-                    <strong>Tsedenia Gebremarkos Song</strong><br>
-                    <small style="opacity: 0.7;">Artist Name</small>
+                    <strong>Music Track 3</strong><br>
+                    <small style="opacity: 0.7;">Party Time</small>
                 </div>
             </div>
             
@@ -1202,8 +1212,8 @@
             <div class="music-option" onclick="selectMusic('song4')">
                 <span class="music-icon">🎶</span>
                 <div>
-                    <strong>Shemanefew Mikaya</strong><br>
-                    <small style="opacity: 0.7;">Behailu</small>
+                    <strong>Music Track 4</strong><br>
+                    <small style="opacity: 0.7;">Celebration Mix</small>
                 </div>
             </div>
         </div>
@@ -1278,17 +1288,16 @@
             ================================
             🎬 VIDEO SECTION
             ================================
-            If you have a video file, add it here with the exact filename
-            Example: <video controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
-                       <source src="your-video-filename.mp4" type="video/mp4">
-                     </video>
+            Video from your GitHub: VID_20260226_171645_097.mp4
             -->
             <div class="photo-card" style="grid-column: span 1;">
-                <div class="photo-placeholder">
-                    <!-- Add your video filename here when you upload it -->
-                    🎬
+                <div class="photo-placeholder" style="padding: 0; overflow: hidden;">
+                    <video controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block;" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23FF6B9D' width='100' height='100'/%3E%3Ctext y='.9em' font-size='60' text-anchor='middle' x='50' fill='white'%3E🎥%3C/text%3E%3C/svg%3E">
+                        <source src="VID_20260226_171645_097.mp4" type="video/mp4">
+                        Your browser doesn't support video playback.
+                    </video>
                 </div>
-                <div class="caption">Our Special Video</div>
+                <div class="caption">Our Special Moment 🎥💜</div>
             </div>
         </div>
         <button class="continue-btn gallery-continue-btn" onclick="playSound('buttonClick'); goToScreen('reasonsScreen'); createConfetti(); playSound('celebration');">
@@ -2224,92 +2233,101 @@
 
         // Music Selection Logic - FIXED VERSION WITH AUTOPLAY HANDLING
         /* ================================
-           🎵 MUSIC PLAYBACK - Using .m4a files from your GitHub
-           Browser autoplay policies require user interaction to play music.
-           This version handles that properly!
+           🎵 MUSIC PLAYBACK - Using YOUR music files from GitHub
            ================================
         */
         
-        // Create audio objects
-        let song1Audio = null;
-        let song2Audio = null;
-        let song3Audio = null;
-        let song4Audio = null;
+        console.log('🎵 Music system initializing...');
+        
+        // YOUR ACTUAL MUSIC FILES FROM GITHUB
+        const musicFiles = {
+            song1: {
+                file: 'music1.mp3',
+                name: 'Song 1',
+                artist: 'Your Music'
+            },
+            song2: {
+                file: 'music2.mp3',
+                name: 'Song 2',
+                artist: 'Your Music'
+            },
+            song3: {
+                file: 'music3.mp3',
+                name: 'Song 3',
+                artist: 'Your Music'
+            },
+            song4: {
+                file: 'music4.mp3',
+                name: 'Song 4',
+                artist: 'Your Music'
+            }
+        };
+        
+        // Audio objects
+        let audioObjects = {};
         let currentlyPlaying = null;
+        let audioInitialized = false;
         
         // Initialize audio when user first interacts
         function initAudio() {
-            if (!song1Audio) {
-                song1Audio = new Audio('Go Crazy Young Thug Chris Brown.m4a');
-                song2Audio = new Audio('Mind Games Sickick.m4a');
-                song3Audio = new Audio('Shemanefew Mikaya Behailu.m4a');
-                song4Audio = new Audio('Tsedenia Gebremarkos.m4a');
+            if (audioInitialized) {
+                console.log('🎵 Audio already initialized');
+                return;
+            }
+            
+            console.log('🎵 Initializing audio...');
+            
+            for (let [key, config] of Object.entries(musicFiles)) {
+                const audio = new Audio(config.file);
+                audio.volume = 0.6;
+                audio.preload = 'auto';
                 
-                [song1Audio, song2Audio, song3Audio, song4Audio].forEach((audio, index) => {
-                    audio.volume = 0.6;
-                    audio.loop = false;
-                    
-                    audio.addEventListener('loadeddata', () => {
-                        console.log(`✅ Song ${index + 1} loaded and ready!`);
-                    });
-                    
-                    audio.addEventListener('error', (e) => {
-                        console.error(`❌ Song ${index + 1} error:`, audio.error);
-                    });
-                    
-                    audio.addEventListener('canplaythrough', () => {
-                        console.log(`🎵 Song ${index + 1} can play through!`);
-                    });
+                audio.addEventListener('loadeddata', () => {
+                    console.log(`✅ ${config.name} loaded!`);
                 });
                 
-                console.log('🎵 All audio initialized!');
+                audio.addEventListener('error', (e) => {
+                    console.error(`❌ ${config.name} error:`, audio.error);
+                });
+                
+                audioObjects[key] = audio;
             }
+            
+            audioInitialized = true;
+            console.log('🎵 Audio initialized!');
         }
         
+        // Select and play music
         function selectMusic(type) {
+            console.log(`🎵 Selected: ${type}`);
+            
             // Initialize audio on first interaction
-            initAudio();
+            if (!audioInitialized) {
+                initAudio();
+            }
             
             playSound('musicSelect');
             
             // Stop all other songs
-            if (song1Audio) song1Audio.pause();
-            if (song2Audio) song2Audio.pause();
-            if (song3Audio) song3Audio.pause();
-            if (song4Audio) song4Audio.pause();
-            
-            // Get selected audio and info
-            let selectedAudio;
-            let songName = '';
-            let artistName = '';
-            
-            switch(type) {
-                case 'song1':
-                    selectedAudio = song1Audio;
-                    songName = 'Go Crazy';
-                    artistName = 'Young Thug & Chris Brown';
-                    break;
-                case 'song2':
-                    selectedAudio = song2Audio;
-                    songName = 'Mind Games';
-                    artistName = 'Sickick';
-                    break;
-                case 'song3':
-                    selectedAudio = song3Audio;
-                    songName = 'Shemanefew Mikaya';
-                    artistName = 'Behailu';
-                    break;
-                case 'song4':
-                    selectedAudio = song4Audio;
-                    songName = 'Tsedenia Gebremarkos';
-                    artistName = 'Ethiopian Music';
-                    break;
+            for (let audio of Object.values(audioObjects)) {
+                if (audio && !audio.paused) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
             }
             
-            // Create loading popup
-            const musicPopup = document.createElement('div');
-            musicPopup.id = 'musicPopup';
-            musicPopup.style.cssText = `
+            const config = musicFiles[type];
+            const selectedAudio = audioObjects[type];
+            
+            if (!config || !selectedAudio) {
+                console.error(`❌ No audio found for ${type}`);
+                goToScreen('galleryScreen');
+                return;
+            }
+            
+            // Create popup
+            const popup = document.createElement('div');
+            popup.style.cssText = `
                 position: fixed;
                 top: 50%;
                 left: 50%;
@@ -2318,115 +2336,66 @@
                 padding: 40px 60px;
                 border-radius: 30px;
                 border: 5px solid white;
-                box-shadow: 0 30px 60px rgba(255, 107, 157, 0.5);
+                box-shadow: 0 30px 60px rgba(255, 107, 157, 0.6);
                 z-index: 10000;
                 text-align: center;
-                animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                animation: popIn 0.4s ease-out;
             `;
-            
-            musicPopup.innerHTML = `
+            popup.innerHTML = `
                 <div style="font-size: 4rem; margin-bottom: 20px; animation: bounce 1s infinite;">🎵</div>
                 <div style="font-size: 2rem; color: white; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); margin-bottom: 10px;">
-                    ${songName}
+                    ${config.name}
                 </div>
                 <div style="font-size: 1.2rem; color: white; opacity: 0.9; margin-bottom: 20px;">
-                    ${artistName}
+                    ${config.artist}
                 </div>
                 <div id="musicStatus" style="font-size: 1rem; color: white; padding: 10px 20px; background: rgba(255,255,255,0.3); border-radius: 20px;">
                     Loading...
                 </div>
             `;
+            document.body.appendChild(popup);
             
-            document.body.appendChild(musicPopup);
-            
-            // Add pop-in animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes popIn {
-                    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-                    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Try to play the music
-            if (selectedAudio) {
-                console.log(`🎵 Attempting to play: ${songName}`);
-                
-                selectedAudio.currentTime = 0;
-                
-                const playPromise = selectedAudio.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(() => {
-                            console.log(`✅ ${songName} IS NOW PLAYING!`);
-                            currentlyPlaying = selectedAudio;
-                            
-                            // Show music player control
-                            const musicPlayer = document.getElementById('musicPlayer');
-                            const songNameEl = document.getElementById('currentSongName');
-                            const artistNameEl = document.getElementById('currentArtistName');
-                            
-                            musicPlayer.classList.add('active');
-                            songNameEl.textContent = songName;
-                            artistNameEl.textContent = artistName + ' • Click to pause';
-                            
-                            // Update status to playing
-                            const statusDiv = document.getElementById('musicStatus');
-                            if (statusDiv) {
-                                statusDiv.innerHTML = '🎶 Playing! Enjoy! 🎶';
-                                statusDiv.style.background = 'rgba(255,255,255,0.5)';
-                            }
-                            
-                            // Keep popup visible longer so user sees it's playing
-                            setTimeout(() => {
-                                musicPopup.style.animation = 'fadeOut 0.5s forwards';
-                                setTimeout(() => {
-                                    musicPopup.remove();
-                                    goToScreen('galleryScreen');
-                                }, 500);
-                            }, 2500);
-                        })
-                        .catch(error => {
-                            console.error(`❌ Error playing ${songName}:`, error);
-                            
-                            // Show error message
-                            const statusDiv = document.getElementById('musicStatus');
-                            if (statusDiv) {
-                                statusDiv.innerHTML = `
-                                    ⚠️ Couldn't play song<br>
-                                    <small style="font-size: 0.8rem;">Check if file exists in GitHub</small>
-                                `;
-                                statusDiv.style.background = 'rgba(255,0,0,0.3)';
-                            }
-                            
-                            // Still continue after error
-                            setTimeout(() => {
-                                musicPopup.style.animation = 'fadeOut 0.5s forwards';
-                                setTimeout(() => {
-                                    musicPopup.remove();
-                                    goToScreen('galleryScreen');
-                                }, 500);
-                            }, 3000);
-                        });
-                }
-            } else {
-                setTimeout(() => {
-                    musicPopup.remove();
-                    goToScreen('galleryScreen');
-                }, 1500);
-            }
+            // Try to play
+            selectedAudio.currentTime = 0;
+            selectedAudio.play()
+                .then(() => {
+                    console.log(`✅ Playing ${config.name}!`);
+                    currentlyPlaying = selectedAudio;
+                    
+                    // Update popup
+                    const status = document.getElementById('musicStatus');
+                    if (status) {
+                        status.innerHTML = '🎶 Playing! 🎶';
+                        status.style.background = 'rgba(76, 175, 80, 0.8)';
+                    }
+                    
+                    // Show music player
+                    const player = document.getElementById('musicPlayer');
+                    if (player) {
+                        player.classList.add('active');
+                        document.getElementById('currentSongName').textContent = config.name;
+                        document.getElementById('currentArtistName').textContent = config.artist + ' • Click to pause';
+                    }
+                    
+                    setTimeout(() => {
+                        popup.remove();
+                        goToScreen('galleryScreen');
+                    }, 2000);
+                })
+                .catch(error => {
+                    console.error(`❌ Play error:`, error);
+                    const status = document.getElementById('musicStatus');
+                    if (status) {
+                        status.innerHTML = `⚠️ Can't play<br><small>File: ${config.file}</small>`;
+                        status.style.background = 'rgba(244, 67, 54, 0.8)';
+                    }
+                    
+                    setTimeout(() => {
+                        popup.remove();
+                        goToScreen('galleryScreen');
+                    }, 3000);
+                });
         }
-        
-        // Add fadeOut animation
-        const fadeOutStyle = document.createElement('style');
-        fadeOutStyle.textContent = `
-            @keyframes fadeOut {
-                to { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-            }
-        `;
-        document.head.appendChild(fadeOutStyle);
 
         // Screen Navigation with Sound Effects
         function goToScreen(screenId) {
